@@ -30,19 +30,16 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFitnessFunction() {
-        Function fitnessFunction = new PerformanceFunction(tssFunction,42, LocalDate.now());
-        return fitnessFunction;
+        return new PerformanceFunction(tssFunction,42, LocalDate.now());
     }
 
     @Override
     public Function getFatigueFunction() {
-        Function fatigueFunction = new PerformanceFunction(tssFunction,7, LocalDate.now());
-        return fatigueFunction;
+        return new PerformanceFunction(tssFunction,7, LocalDate.now());
     }
 
     @Override
     public Function getFormFunction() {
-        Function formFunction = new FormFunction(getFitnessFunction(), getFatigueFunction());
-        return formFunction;
+        return new FormFunction(getFitnessFunction(), getFatigueFunction());
     }
 }
