@@ -9,23 +9,28 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by davids on 28/02/2017.
- */
+
 public class PerformanceManagementTool implements PerformanceManagement {
 
 
     private Map<LocalDate, Double> tssMap;
     private Function tssFunction;
 
+
     public PerformanceManagementTool() {
         this.tssMap = new HashMap<>();
         this.tssFunction = new DataBasedFunction(tssMap);
     }
 
+
     @Override
     public void addTrainingsDay(LocalDate date, double tss) {
-        tssMap.put(date, tss);
+        if (tssMap.containsKey(date)) {
+            double temp = tssMap.get(date);
+            tssMap.put(date, temp+tss);
+        } else {
+            tssMap.put(date, tss);
+        }
     }
 
     @Override
@@ -41,5 +46,9 @@ public class PerformanceManagementTool implements PerformanceManagement {
     @Override
     public Function getFormFunction() {
         return new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
+    }
+
+    public Map<LocalDate, Double> getTssMap() {
+        return tssMap;
     }
 }
