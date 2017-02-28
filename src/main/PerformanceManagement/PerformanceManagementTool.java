@@ -1,4 +1,4 @@
-package main;
+package main.PerformanceManagement;
 
 import main.Functions.DataBasedFunction;
 import main.Functions.DifferenceFunction;
@@ -12,14 +12,10 @@ import java.util.Map;
 
 public class PerformanceManagementTool implements PerformanceManagement {
 
-
     private Map<LocalDate, Double> tssMap;
-    private Function tssFunction;
-
 
     public PerformanceManagementTool() {
         this.tssMap = new HashMap<>();
-        this.tssFunction = new DataBasedFunction(tssMap);
     }
 
 
@@ -35,12 +31,16 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFitnessFunction() {
-        return new PerformanceFunction(tssFunction,42, LocalDate.now());
+        return new PerformanceFunction(getTssFunction(),42, LocalDate.now());
+    }
+
+    private DataBasedFunction getTssFunction() {
+        return new DataBasedFunction(tssMap);
     }
 
     @Override
     public Function getFatigueFunction() {
-        return new PerformanceFunction(tssFunction,7, LocalDate.now());
+        return new PerformanceFunction(getTssFunction(),7, LocalDate.now());
     }
 
     @Override
@@ -48,7 +48,4 @@ public class PerformanceManagementTool implements PerformanceManagement {
         return new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
     }
 
-    public Map<LocalDate, Double> getTssMap() {
-        return tssMap;
-    }
 }

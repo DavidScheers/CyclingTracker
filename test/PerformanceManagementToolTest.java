@@ -1,11 +1,10 @@
 
-import main.PerformanceManagementTool;
+import main.PerformanceManagement.PerformanceManagementTool;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by davids on 28/02/2017.
@@ -17,37 +16,16 @@ public class PerformanceManagementToolTest {
     @Before
     public void setUp() throws Exception {
         performanceManagementTool = new PerformanceManagementTool();
-        /*
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(3), 0.45);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), 0.60);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
-        */
+
+        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(3), 0.45);
+        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), 0.60);
+        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
     }
 
     @Test
-    public void addTrainingsDay_AddaDay_Unique() throws Exception {
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
-        assertTrue(performanceManagementTool.getTssMap().containsKey(LocalDate.now().minusDays(1)));
-    }
-
-    @Test
-    public void addTrainingsDay_AddaDay_Existing() throws Exception {
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.05);
-        assertTrue(performanceManagementTool.getTssMap().containsKey(LocalDate.now().minusDays(1)));
-    }
-
-    @Test
-    public void addTrainingsDay_AddaSecondDay_Unique() throws Exception {
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
-        performanceManagementTool.addTrainingsDay(LocalDate.now(), 0.5);
-        assertTrue(performanceManagementTool.getTssMap().containsKey(LocalDate.now().minusDays(1))
-        && performanceManagementTool.getTssMap().containsKey(LocalDate.now()));
-    }
-
-    @Test
-    public void getFitnessFunction() throws Exception {
-
+    public void AddTraingignsDay_FatigueRoseNextDay() throws Exception {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
+        //Assert.
     }
 
     @Test
@@ -61,3 +39,9 @@ public class PerformanceManagementToolTest {
     }
 
 }
+
+/*
+- Als ge een trainingsdag toevoegt, moet de dag erna uw fatigue gestegen zijn
+- Als ge een trainingsdag toevoegt, moet de dag ervoor uw fatigue ongewijzigd blijven
+- Als ge harder traint, moet uw fatigue meer stijgen
+ */
