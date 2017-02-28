@@ -5,12 +5,12 @@ import java.time.LocalDate;
 /**
  * Created by davids on 28/02/2017.
  */
-public class FormFunction implements Function {
+public class DifferenceFunction implements Function {
 
     private Function fitnessFunction;
     private Function fatigueFunction;
 
-    public FormFunction(Function fitnessFunction, Function fatigueFunction) {
+    public DifferenceFunction(Function fitnessFunction, Function fatigueFunction) {
         this.fitnessFunction = fitnessFunction;
         this.fatigueFunction = fatigueFunction;
     }

@@ -1,7 +1,7 @@
 package main;
 
 import main.Functions.DataBasedFunction;
-import main.Functions.FormFunction;
+import main.Functions.DifferenceFunction;
 import main.Functions.Function;
 import main.Functions.PerformanceFunction;
 
@@ -40,6 +40,6 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFormFunction() {
-        return new FormFunction(getFitnessFunction(), getFatigueFunction());
+        return new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
     }
 }
