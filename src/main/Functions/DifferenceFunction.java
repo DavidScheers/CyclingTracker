@@ -7,17 +7,17 @@ import java.time.LocalDate;
  */
 public class DifferenceFunction implements Function {
 
-    private Function fitnessFunction;
-    private Function fatigueFunction;
+    private Function firstFunction;
+    private Function secondFunction;
 
-    public DifferenceFunction(Function fitnessFunction, Function fatigueFunction) {
-        this.fitnessFunction = fitnessFunction;
-        this.fatigueFunction = fatigueFunction;
+    public DifferenceFunction(Function firstFunction, Function secondFunction) {
+        this.firstFunction = firstFunction;
+        this.secondFunction = secondFunction;
     }
 
     @Override
     public double getValue(LocalDate date) {
-        double value = fitnessFunction.getValue(date.minusDays(1)) - fatigueFunction.getValue(date.minusDays(1));
+        double value = firstFunction.getValue(date.minusDays(1)) - secondFunction.getValue(date.minusDays(1));
         return value;
     }
 }
