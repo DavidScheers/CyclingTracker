@@ -55,9 +55,9 @@ public class PerformanceManagementToolTest {
 
     @Test
     public void AddTrainingsDay_FormDropsNextDay() throws Exception {
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
+        performanceManagementTool.addTrainingsDay(yesterDay, 0.5);
         Function formFunction = performanceManagementTool.getFormFunction();
-        assertTrue(detectChange(formFunction, yesterYesterDay, yesterDay) == -1);
+        assertTrue(detectChange(formFunction, yesterYesterDay, today) == -1);
     }
 
     @Test

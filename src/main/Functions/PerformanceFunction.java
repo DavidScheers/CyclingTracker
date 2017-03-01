@@ -19,12 +19,13 @@ public class PerformanceFunction implements Function {
         if (date.isBefore(startDate)) {
             return 0.0;
         } else {
-            return getValueYesterday(date) + (getTss(date) - getValueYesterday(date))*getFactor();
+            double valueYesterday = getValueYesterday(date);
+            return valueYesterday + (getTss(date) - valueYesterday)*getFactor();
         }
     }
 
     private double getValueYesterday(LocalDate date) {
-        return getValue(date.minusDays(1));
+        return this.getValue(date.minusDays(1));
     }
 
     private double getTss(LocalDate date) {

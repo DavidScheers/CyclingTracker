@@ -44,7 +44,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
     @Override
     public Function getFormFunction() {
         DifferenceFunction differenceFunction = new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
-        return new ShiftedFunction(differenceFunction, -1);
+        return new ShiftedFunction(differenceFunction, 1);
     }
 
 }
