@@ -17,7 +17,14 @@ public class DifferenceFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        double value = firstFunction.getValue(date.minusDays(1)) - secondFunction.getValue(date.minusDays(1));
-        return value;
+        return getFirstValue(date) - getSecondValue(date);
+    }
+
+    private double getSecondValue(LocalDate date) {
+        return secondFunction.getValue(date);
+    }
+
+    private double getFirstValue(LocalDate date) {
+        return firstFunction.getValue(date);
     }
 }
