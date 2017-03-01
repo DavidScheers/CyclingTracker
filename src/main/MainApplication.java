@@ -1,6 +1,5 @@
-package main; /**
- * Created by davids on 27/02/2017.
- */
+package main;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -11,6 +10,7 @@ import javafx.stage.Stage;
 import main.Functions.DataBasedFunction;
 import main.Functions.Function;
 import main.Functions.PerformanceFunction;
+import main.PerformanceManagement.PerformanceManagementTool;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -27,9 +27,15 @@ public class MainApplication extends Application {
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
 
         // START
-        DataBasedFunction tssFunction = new DataBasedFunction(getFakeData());
-        Function functionToPlot = new PerformanceFunction(tssFunction, 42, LocalDate.now());
-        XYChart.Series series = getData(functionToPlot, LocalDate.now(), 20);
+        PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(2));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), 0.9);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), 0.35);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), 0.4);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), 0.8);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), 0.4);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), 0.65);
+        Function functionToPlot = performanceManagementTool.getFitnessFunction();
+        XYChart.Series series = getData(functionToPlot, LocalDate.now().minusDays(30), 30);
         // STOP
 
         lineChart.getData().add(series);
@@ -42,14 +48,6 @@ public class MainApplication extends Application {
         stage.show();
     }
 
-    private Map<LocalDate,Double> getFakeData() {
-        Map<LocalDate, Double> aMap = new HashMap<>();
-        aMap.put(LocalDate.now(), 5.0);
-        aMap.put(LocalDate.now().plusDays(1), 6.3);
-        aMap.put(LocalDate.now().plusDays(2), 7.7);
-
-        return aMap;
-    }
 
     private XYChart.Series getData(Function functionToPlot, LocalDate startDate, int numberOfDaysToPlot) {
         //defining a series
