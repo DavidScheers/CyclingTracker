@@ -17,7 +17,7 @@ public class ShiftedFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        return differenceFunction.getValue(date.plusDays(datesToShift));
+        return differenceFunction.getValue(date.minusDays(datesToShift));
     }
 }
 
