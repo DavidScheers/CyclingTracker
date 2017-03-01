@@ -43,21 +43,21 @@ public class PerformanceManagementToolTest {
     public void AddTrainingsDay_FatigueRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fatigueFunction = performanceManagementTool.getFatigueFunction();
-        assertTrue(detectChange(fatigueFunction, yesterYesterDay, yesterDay) == 1);
+        assertTrue(assertRisingFunction(fatigueFunction, yesterDay));
     }
 
     @Test
     public void AddTrainingsDay_FitnessRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fitnessFunction = performanceManagementTool.getFitnessFunction();
-        assertTrue(detectChange(fitnessFunction, yesterYesterDay, yesterDay) == 1);
+        assertTrue(assertRisingFunction(fitnessFunction, yesterDay));
     }
 
     @Test
     public void AddTrainingsDay_FormDropsNextDay() throws Exception {
-        performanceManagementTool.addTrainingsDay(yesterDay, 0.5);
+        performanceManagementTool.addTrainingsDay(yesterYesterDay, 0.5);
         Function formFunction = performanceManagementTool.getFormFunction();
-        assertTrue(detectChange(formFunction, yesterYesterDay, today) == -1);
+        assertTrue(assertRisingFunction(formFunction, today));
     }
 
     @Test
@@ -89,23 +89,12 @@ public class PerformanceManagementToolTest {
         assertTrue(fatigueRise_SoftTraining < fatigueRise_HardTraining);
     }
 
-    private boolean valueRose(Function function, LocalDate start, LocalDate end) {
-        return function.getValue(end) > function.getValue(start);
-    }
 
-    private boolean valueDropped(Function function, LocalDate start, LocalDate end) {
-        return function.getValue(end) < function.getValue(start);
-    }
-
-    private int detectChange(Function function, LocalDate start, LocalDate end) {
-        int change;
-        if (valueRose(function, start, end)) {
-            change = 1;
-        } else if (valueDropped(function, start, end)) {
-            change = -1;
-        } else {
-            change = 0;
+    private boolean assertRisingFunction(Function function, LocalDate date) {
+        boolean assertion = false;
+        if (function.getValue(date) > function.getValue(date.minusDays(1))) {
+            assertion = true;
         }
-        return change;
+        return assertion;
     }
 }
