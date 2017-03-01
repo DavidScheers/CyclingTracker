@@ -1,28 +1,20 @@
 
 import main.Functions.Function;
-import main.Functions.PerformanceFunction;
 import main.PerformanceManagement.PerformanceManagementTool;
-import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-/**
- * Created by davids on 28/02/2017.
- */
+
 public class PerformanceManagementToolTest {
 
     private PerformanceManagementTool performanceManagementTool;
 
     @Before
     public void setUp() throws Exception {
-        performanceManagementTool = new PerformanceManagementTool();
-
-        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(3), 0.45);
-        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), 0.60);
-        //performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.85);
+        performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(3));
     }
 
     @Test
@@ -44,27 +36,52 @@ public class PerformanceManagementToolTest {
     }
 
     @Test
-    public void AddTraingignsDay_FatigueRoseNextDay() throws Exception {
+    public void AddTrainingsDay_FatigueRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fatigueFunction = performanceManagementTool.getFatigueFunction();
-        System.out.println(fatigueFunction.getValue(LocalDate.now().minusDays(1)));
-        assertTrue(fatigueFunction.getValue(LocalDate.now()) > fatigueFunction.getValue(LocalDate.now().minusDays(1)));
+        assertTrue(fatigueFunction.getValue(LocalDate.now().minusDays(1)) > fatigueFunction.getValue(LocalDate.now().minusDays(2)));
     }
 
     @Test
-    public void getFatigueFunction() throws Exception {
-
+    public void AddTrainingsDay_FitnessRoseNextDay() throws Exception {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
+        Function fitnessFunction = performanceManagementTool.getFitnessFunction();
+        assertTrue(fitnessFunction.getValue(LocalDate.now().minusDays(1)) > fitnessFunction.getValue(LocalDate.now().minusDays(2)));
     }
 
     @Test
-    public void getFormFunction() throws Exception {
-
+    public void AddTrainingsDay_FormDropsNextDay() throws Exception {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
+        Function formFunction = performanceManagementTool.getFormFunction();
+        assertTrue(formFunction.getValue(LocalDate.now()) < formFunction.getValue(LocalDate.now().minusDays(1)));
     }
 
+    @Test
+    public void AddTrainingsDay_FitnessDayBeforeIsUnaffected() throws Exception {
+        Function fitnessFunction = performanceManagementTool.getFitnessFunction();
+        double fitnessBefore = fitnessFunction.getValue(LocalDate.now().minusDays(2));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
+        double fitnessBefore_AfterAddingDay = fitnessFunction.getValue(LocalDate.now().minusDays(2));
+        assertTrue(fitnessBefore == fitnessBefore_AfterAddingDay);
+    }
+
+    @Test
+    public void AfterRestDays_FormShouldIncrease() throws Exception {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(5), 0.8);
+        Function formFunction = performanceManagementTool.getFormFunction();
+        double formAfterTraining = formFunction.getValue(LocalDate.now().minusDays(4));
+        double formAfterRest = formFunction.getValue(LocalDate.now().minusDays(2));
+
+        assertTrue(formAfterTraining < formAfterRest);
+    }
+
+    @Test
+    public void HarderTraining_ResultsInBiggerFatigueRise() throws Exception {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(5), 0.05);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.95);
+        Function fatigueFunction = performanceManagementTool.getFatigueFunction();
+        double fatigueRise_SoftTraining = fatigueFunction.getValue(LocalDate.now().minusDays(5)) - fatigueFunction.getValue(LocalDate.now().minusDays(6));
+        double fatigueRise_HardTraining = fatigueFunction.getValue(LocalDate.now().minusDays(1)) - fatigueFunction.getValue(LocalDate.now().minusDays(2));
+        assertTrue(fatigueRise_SoftTraining < fatigueRise_HardTraining);
+    }
 }
-
-/*
-- Als ge een trainingsdag toevoegt, moet de dag erna uw fatigue gestegen zijn
-- Als ge een trainingsdag toevoegt, moet de dag ervoor uw fatigue ongewijzigd blijven
-- Als ge harder traint, moet uw fatigue meer stijgen
- */
