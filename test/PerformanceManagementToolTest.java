@@ -1,6 +1,5 @@
 
 import main.Functions.Function;
-import main.Functions.PerformanceFunction;
 import main.PerformanceManagement.PerformanceManagementTool;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -44,21 +43,21 @@ public class PerformanceManagementToolTest {
     public void AddTrainingsDay_FatigueRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fatigueFunction = performanceManagementTool.getFatigueFunction();
-        assertTrue(valueRose(fatigueFunction, yesterYesterDay, yesterDay));
+        assertTrue(detectChange(fatigueFunction, yesterYesterDay, yesterDay) == 1);
     }
 
     @Test
     public void AddTrainingsDay_FitnessRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fitnessFunction = performanceManagementTool.getFitnessFunction();
-        assertTrue(valueRose(fitnessFunction, yesterYesterDay, yesterDay));
+        assertTrue(detectChange(fitnessFunction, yesterYesterDay, yesterDay) == 1);
     }
 
     @Test
     public void AddTrainingsDay_FormDropsNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function formFunction = performanceManagementTool.getFormFunction();
-        assertTrue(valueDropped(formFunction, yesterYesterDay, yesterDay));
+        assertTrue(detectChange(formFunction, yesterYesterDay, yesterDay) == -1);
     }
 
     @Test
@@ -98,5 +97,15 @@ public class PerformanceManagementToolTest {
         return function.getValue(end) < function.getValue(start);
     }
 
-
+    private int detectChange(Function function, LocalDate start, LocalDate end) {
+        int change;
+        if (valueRose(function, start, end)) {
+            change = 1;
+        } else if (valueDropped(function, start, end)) {
+            change = -1;
+        } else {
+            change = 0;
+        }
+        return change;
+    }
 }
