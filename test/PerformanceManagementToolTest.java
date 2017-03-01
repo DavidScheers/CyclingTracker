@@ -43,21 +43,21 @@ public class PerformanceManagementToolTest {
     public void AddTrainingsDay_FatigueRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fatigueFunction = performanceManagementTool.getFatigueFunction();
-        assertTrue(assertRisingFunction(fatigueFunction, yesterDay));
+        assertRisingFunction(fatigueFunction, yesterDay);
     }
 
     @Test
     public void AddTrainingsDay_FitnessRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
         Function fitnessFunction = performanceManagementTool.getFitnessFunction();
-        assertTrue(assertRisingFunction(fitnessFunction, yesterDay));
+        assertRisingFunction(fitnessFunction, yesterDay);
     }
 
     @Test
     public void AddTrainingsDay_FormDropsNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(yesterYesterDay, 0.5);
         Function formFunction = performanceManagementTool.getFormFunction();
-        assertTrue(assertRisingFunction(formFunction, today));
+        assertRisingFunction(formFunction, today);
     }
 
     @Test
@@ -81,11 +81,13 @@ public class PerformanceManagementToolTest {
 
     @Test
     public void HarderTraining_ResultsInBiggerFatigueRise() throws Exception {
-        performanceManagementTool.addTrainingsDay(oneWeekAgo, 0.05);
-        performanceManagementTool.addTrainingsDay(yesterDay, 0.95);
+        performanceManagementTool.addTrainingsDay(yesterDay, 0.05);
+        PerformanceManagementTool performanceManagementToolHard = new PerformanceManagementTool(LocalDate.now().minusMonths(3));
+        performanceManagementToolHard.addTrainingsDay(yesterDay, 0.95);
         Function fatigueFunction = performanceManagementTool.getFatigueFunction();
-        double fatigueRise_SoftTraining = fatigueFunction.getValue(oneWeekAgo) - fatigueFunction.getValue(LocalDate.now().minusDays(6));
-        double fatigueRise_HardTraining = fatigueFunction.getValue(yesterDay) - fatigueFunction.getValue(yesterYesterDay);
+        Function fatigueFunctionHard = performanceManagementToolHard.getFatigueFunction();
+        double fatigueRise_SoftTraining = fatigueFunction.getValue(yesterDay) - fatigueFunction.getValue(yesterYesterDay);
+        double fatigueRise_HardTraining = fatigueFunctionHard.getValue(yesterDay) - fatigueFunction.getValue(yesterYesterDay);
         assertTrue(fatigueRise_SoftTraining < fatigueRise_HardTraining);
     }
 
@@ -93,16 +95,15 @@ public class PerformanceManagementToolTest {
     public void FitnessDecreasesIfYouDontTrain() throws Exception {
         performanceManagementTool.addTrainingsDay(oneWeekAgo, 0.95);
         Function fitnessFunction = performanceManagementTool.getFitnessFunction();
-        assertTrue(assertRisingFunction(fitnessFunction, oneWeekAgo));
-        assertFalse(assertRisingFunction(fitnessFunction, yesterDay));
+        assertRisingFunction(fitnessFunction, oneWeekAgo);
+        assertDecreasingFunction(fitnessFunction, yesterDay);
     }
 
+    private void assertRisingFunction(Function function, LocalDate date) {
+        assertTrue(function.getValue(date) > function.getValue(date.minusDays(1)));
+    }
 
-    private boolean assertRisingFunction(Function function, LocalDate date) {
-        boolean assertion = false;
-        if (function.getValue(date) > function.getValue(date.minusDays(1))) {
-            assertion = true;
-        }
-        return assertion;
+    private void assertDecreasingFunction(Function function, LocalDate date) {
+        assertTrue(function.getValue(date) < function.getValue(date.minusDays(1)));
     }
 }
