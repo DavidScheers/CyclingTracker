@@ -1,6 +1,9 @@
 
+import main.Functions.Function;
+import main.Functions.PerformanceFunction;
 import main.PerformanceManagement.PerformanceManagementTool;
 import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,9 +26,29 @@ public class PerformanceManagementToolTest {
     }
 
     @Test
+    public void BeforeAddingTrainingDays_FitnessShouldBeZero() throws Exception {
+        Function fitnessFunction = performanceManagementTool.getFitnessFunction();
+        assertTrue(fitnessFunction.getValue(LocalDate.now()) == 0);
+    }
+
+    @Test
+    public void BeforeAddingTrainingDays_FormShouldBeZero() throws Exception {
+        Function formFunction = performanceManagementTool.getFormFunction();
+        assertTrue(formFunction.getValue(LocalDate.now()) == 0);
+    }
+
+    @Test
+    public void BeforeAddingTrainingDays_FatigueShouldBeZero() throws Exception {
+        Function fatigueFunction = performanceManagementTool.getFatigueFunction();
+        assertTrue(fatigueFunction.getValue(LocalDate.now()) == 0);
+    }
+
+    @Test
     public void AddTraingignsDay_FatigueRoseNextDay() throws Exception {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(1), 0.5);
-        //Assert.
+        Function fatigueFunction = performanceManagementTool.getFatigueFunction();
+        System.out.println(fatigueFunction.getValue(LocalDate.now().minusDays(1)));
+        assertTrue(fatigueFunction.getValue(LocalDate.now()) > fatigueFunction.getValue(LocalDate.now().minusDays(1)));
     }
 
     @Test
