@@ -89,6 +89,14 @@ public class PerformanceManagementToolTest {
         assertTrue(fatigueRise_SoftTraining < fatigueRise_HardTraining);
     }
 
+    @Test
+    public void FitnessDecreasesIfYouDontTrain() throws Exception {
+        performanceManagementTool.addTrainingsDay(oneWeekAgo, 0.95);
+        Function fitnessFunction = performanceManagementTool.getFitnessFunction();
+        assertTrue(assertRisingFunction(fitnessFunction, oneWeekAgo));
+        assertFalse(assertRisingFunction(fitnessFunction, yesterDay));
+    }
+
 
     private boolean assertRisingFunction(Function function, LocalDate date) {
         boolean assertion = false;
