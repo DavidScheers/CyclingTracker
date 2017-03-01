@@ -13,9 +13,11 @@ import java.util.Map;
 public class PerformanceManagementTool implements PerformanceManagement {
 
     private Map<LocalDate, Double> tssMap;
+    private LocalDate startOfTrackingDate;
 
-    public PerformanceManagementTool() {
+    public PerformanceManagementTool(LocalDate startOfTrackingDate) {
         this.tssMap = new HashMap<>();
+        this.startOfTrackingDate = startOfTrackingDate;
     }
 
 
@@ -31,7 +33,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFitnessFunction() {
-        return new PerformanceFunction(getTssFunction(),42, LocalDate.now());
+        return new PerformanceFunction(getTssFunction(),42, startOfTrackingDate);
     }
 
     private DataBasedFunction getTssFunction() {
@@ -40,7 +42,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFatigueFunction() {
-        return new PerformanceFunction(getTssFunction(),7, LocalDate.now());
+        return new PerformanceFunction(getTssFunction(),7, startOfTrackingDate);
     }
 
     @Override
