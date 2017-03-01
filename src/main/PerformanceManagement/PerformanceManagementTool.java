@@ -1,9 +1,7 @@
 package main.PerformanceManagement;
 
-import main.Functions.DataBasedFunction;
-import main.Functions.DifferenceFunction;
-import main.Functions.Function;
-import main.Functions.PerformanceFunction;
+import main.Functions.*;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +43,8 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFormFunction() {
-        return new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
+        DifferenceFunction differenceFunction = new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
+        return new ShiftedFunction(differenceFunction, -1);
     }
 
 }
