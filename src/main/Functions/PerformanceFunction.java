@@ -2,10 +2,6 @@ package main.Functions;
 
 import java.time.LocalDate;
 
-/**
- * Created by davids on 27/02/2017.
- */
-
 public class PerformanceFunction implements Function {
 
     private Function tssFunction;
@@ -23,11 +19,20 @@ public class PerformanceFunction implements Function {
         if (date.isBefore(startDate)) {
             return 0.0;
         } else {
-            double valueYesterday = getValue(date.minusDays(1));
-            double tss = tssFunction.getValue(date);
-            double factor = (1-Math.exp(-1/decayParameter));
-            return valueYesterday + (tss - valueYesterday)*factor;
+            return getValueYesterday(date) + (getTss(date) - getValueYesterday(date))*getFactor();
         }
+    }
+
+    private double getValueYesterday(LocalDate date) {
+        return getValue(date.minusDays(1));
+    }
+
+    private double getTss(LocalDate date) {
+        return tssFunction.getValue(date);
+    }
+
+    private double getFactor() {
+        return (1-Math.exp(-1/decayParameter));
     }
 
 }
