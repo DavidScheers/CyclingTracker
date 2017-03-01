@@ -4,7 +4,6 @@ import main.Functions.DataBasedFunction;
 import main.Functions.DifferenceFunction;
 import main.Functions.Function;
 import main.Functions.PerformanceFunction;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,6 @@ public class PerformanceManagementTool implements PerformanceManagement {
         this.tssMap = new HashMap<>();
         this.startOfTrackingDate = startOfTrackingDate;
     }
-
 
     @Override
     public void addTrainingsDay(LocalDate date, double tss) {
