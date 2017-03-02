@@ -26,8 +26,8 @@ public class ZeroOrderHoldFunctionTest {
         valueMap_WithData = new HashMap<>();
         valueMap_Empty = new HashMap<>();
         getData();
-        zeroOrderHoldFunction_WithData = new ZeroOrderHoldFunction(valueMap_WithData, LONG_AGO);
-        zeroOrderHoldFunction_Empty = new ZeroOrderHoldFunction(valueMap_Empty, LONG_AGO);
+        zeroOrderHoldFunction_WithData = new ZeroOrderHoldFunction(valueMap_WithData);
+        zeroOrderHoldFunction_Empty = new ZeroOrderHoldFunction(valueMap_Empty);
     }
 
     private void getData() {
