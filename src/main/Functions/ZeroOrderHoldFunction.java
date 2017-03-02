@@ -16,7 +16,11 @@ public class ZeroOrderHoldFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        return valueMap.containsKey(date) ? valueMap.get(date) : getValue(date.minusDays(1));
+        if (valueMap.isEmpty()) {
+            return 0.0;
+        } else {
+            return valueMap.containsKey(date) ? valueMap.get(date) : getValue(date.minusDays(1));
+        }
     }
 }
 
