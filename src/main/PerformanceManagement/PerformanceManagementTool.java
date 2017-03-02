@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class PerformanceManagementTool implements PerformanceManagement {
 
-    private Map<LocalDate, WorkoutIntensity> tssMap;
+    private Map<LocalDate, Double> tssMap;
     private Map<LocalDate, Double> ftpMap;
     private LocalDate startOfTrackingDate;
 
@@ -22,9 +22,9 @@ public class PerformanceManagementTool implements PerformanceManagement {
     @Override
     public void addTrainingsDay(LocalDate date, WorkoutIntensity intensity) {
         if (tssMap.containsKey(date)) {
-            tssMap.put(date, getWorkoutIntensity(date, intensity));
+            tssMap.put(date, getUpdatedTss(date, intensity));
         } else {
-            tssMap.put(date, intensity);
+            tssMap.put(date, getTrainingStressScore(date, intensity));
         }
     }
 
@@ -58,36 +58,11 @@ public class PerformanceManagementTool implements PerformanceManagement {
         return new ShiftedFunction(differenceFunction, 1);
     }
 
-    private WorkoutIntensity getWorkoutIntensity(LocalDate date, WorkoutIntensity intensity) {
-        return new WorkoutIntensity(getNewDuration(date, intensity), getNewPower(date, intensity));
+    private double getUpdatedTss(LocalDate date, WorkoutIntensity intensity) {
+        return tssMap.get(date) + getTrainingStressScore(date, intensity);
     }
 
-    private double getNewPower(LocalDate date, WorkoutIntensity intensity) {
-        return getPower(date) + intensity.getPower();
+    private double getTrainingStressScore(LocalDate date, WorkoutIntensity intensity) {
+        return intensity.calculateTrainingStressScore(getFtpFunction().getValue(date));
     }
-
-    private Duration getNewDuration(LocalDate date, WorkoutIntensity intensity) {
-        return getWorkoutDuration(date).plus(intensity.getWorkoutDuration());
-    }
-
-    private double getPower(LocalDate date) {
-        return tssMap.get(date).getPower();
-    }
-
-    private Duration getWorkoutDuration(LocalDate date) {
-        return tssMap.get(date).getWorkoutDuration();
-    }
-
 }
-
-/*
-    @Override
-    public void addTrainingsDay(LocalDate date, double tss) {
-        if (tssMap.containsKey(date)) {
-            double temp = tssMap.get(date);
-            tssMap.put(date, temp+tss);
-        } else {
-            tssMap.put(date, tss);
-        }
-    }
- */
