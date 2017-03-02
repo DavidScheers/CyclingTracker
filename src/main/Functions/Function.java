@@ -6,3 +6,4 @@ public interface Function {
 
     double getValue(LocalDate date);
 }
+

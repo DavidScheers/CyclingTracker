@@ -85,7 +85,7 @@ public class PerformanceManagementToolTest {
         performanceManagementTool.addTrainingsDay(TODAY, 0.05);
         PerformanceManagementTool performanceManagementToolHard = new PerformanceManagementTool(LONG_AGO);
         performanceManagementToolHard.addTrainingsDay(TODAY, 0.95);
-        
+
         Function fatigueFunction_Soft = performanceManagementTool.getFatigueFunction();
         Function fatigueFunction_Hard = performanceManagementToolHard.getFatigueFunction();
 
