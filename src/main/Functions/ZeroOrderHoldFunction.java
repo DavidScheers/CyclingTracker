@@ -9,14 +9,16 @@ import java.util.Map;
 public class ZeroOrderHoldFunction implements Function {
 
     private Map<LocalDate, Double> valueMap;
+    private LocalDate startDate;
 
-    public ZeroOrderHoldFunction(Map<LocalDate, Double> valueMap) {
+    public ZeroOrderHoldFunction(Map<LocalDate, Double> valueMap, LocalDate startDate) {
         this.valueMap = valueMap;
+        this.startDate = startDate;
     }
 
     @Override
     public double getValue(LocalDate date) {
-        if (valueMap.isEmpty()) {
+        if (date.isBefore(startDate) || valueMap.isEmpty()) {
             return 0.0;
         } else {
             return valueMap.containsKey(date) ? valueMap.get(date) : getValue(date.minusDays(1));
