@@ -39,27 +39,31 @@ public class ZeroOrderHoldFunctionTest {
 
     @Test
     public void EmptyMap_ShouldReturnZero() throws Exception {
-        assertTrue(zeroOrderHoldFunction_Empty.getValue(TODAY) == 0.0);
+        assertFunctionValueAtDay(zeroOrderHoldFunction_Empty, TODAY, 0);
     }
 
     @Test
     public void MapWithData_ShouldReturnValue_WhenDateIsPresent_MostRecentDate() throws Exception {
-        assertTrue(zeroOrderHoldFunction_WithData.getValue(TODAY) == 0.65);
+        assertFunctionValueAtDay(zeroOrderHoldFunction_WithData, TODAY, 0.65);
     }
 
     @Test
     public void MapWithData_ShouldReturnValue_WhenDateIsPresent_DateInPast() throws Exception {
-        assertTrue(zeroOrderHoldFunction_WithData.getValue(ONE_WEEK_AGO) == 0.35);
+        assertFunctionValueAtDay(zeroOrderHoldFunction_WithData, ONE_WEEK_AGO, 0.35);
     }
 
     @Test
     public void MapWithData_ShouldReturnFirstExistingValue_WhenAskedForNotPresentDay() throws Exception {
-        assertTrue(zeroOrderHoldFunction_WithData.getValue(YESTERDAY) == 0.8);
+        assertFunctionValueAtDay(zeroOrderHoldFunction_WithData, YESTERDAY, 0.8);
     }
 
     @Test
     public void MapWithData_ShouldReturnZero_WhenAskedForDateBeforeFirstDate() throws Exception {
-        assertTrue(zeroOrderHoldFunction_WithData.getValue(LONG_AGO.minusDays(5)) == 0.0);
+        assertFunctionValueAtDay(zeroOrderHoldFunction_WithData, LONG_AGO.minusDays(5), 0.0);
+    }
+
+    private void assertFunctionValueAtDay(Function f, LocalDate date, double value) {
+        assertTrue(f.getValue(date) == value);
     }
 
 }
