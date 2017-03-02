@@ -9,9 +9,6 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by davids on 2/03/2017.
- */
 public class ZeroOrderHoldFunctionTest {
 
     private Function zeroOrderHoldFunction_WithData;
@@ -29,8 +26,8 @@ public class ZeroOrderHoldFunctionTest {
         valueMap_WithData = new HashMap<>();
         valueMap_Empty = new HashMap<>();
         getData();
-        zeroOrderHoldFunction_WithData = new ZeroOrderHoldFunction(valueMap_WithData);
-        zeroOrderHoldFunction_Empty = new ZeroOrderHoldFunction(valueMap_Empty);
+        zeroOrderHoldFunction_WithData = new ZeroOrderHoldFunction(valueMap_WithData, LONG_AGO);
+        zeroOrderHoldFunction_Empty = new ZeroOrderHoldFunction(valueMap_Empty, LONG_AGO);
     }
 
     private void getData() {
@@ -42,7 +39,7 @@ public class ZeroOrderHoldFunctionTest {
 
     @Test
     public void EmptyMap_ShouldReturnZero() throws Exception {
-        assertTrue(zeroOrderHoldFunction_Empty.getValue(TODAY) == 0);
+        assertTrue(zeroOrderHoldFunction_Empty.getValue(TODAY) == 0.0);
     }
 
     @Test
@@ -58,6 +55,11 @@ public class ZeroOrderHoldFunctionTest {
     @Test
     public void MapWithData_ShouldReturnFirstExistingValue_WhenAskedForNotPresentDay() throws Exception {
         assertTrue(zeroOrderHoldFunction_WithData.getValue(YESTERDAY) == 0.8);
+    }
+
+    @Test
+    public void MapWithData_ShouldReturnZero_WhenAskedForDateBeforeFirstDate() throws Exception {
+        assertTrue(zeroOrderHoldFunction_WithData.getValue(LONG_AGO.minusDays(5)) == 0.0);
     }
 
 }
