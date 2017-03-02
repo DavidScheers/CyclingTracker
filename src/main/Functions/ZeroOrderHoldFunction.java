@@ -20,7 +20,7 @@ public class ZeroOrderHoldFunction implements Function {
         if (valueMap.isEmpty() || date.isBefore(valueMap.firstKey())) {
             return 0.0;
         } else {
-            return valueMap.containsKey(date) ? valueMap.get(date) : getValue(date.minusDays(1));
+            return valueMap.containsKey(date) ? valueMap.get(date) : valueMap.get(valueMap.floorKey(date));
         }
     }
 }
