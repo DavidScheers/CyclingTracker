@@ -46,8 +46,13 @@ public class ZeroOrderHoldFunctionTest {
     }
 
     @Test
-    public void MapWithData_ShouldReturnValue_WhenDateIsPresent() throws Exception {
+    public void MapWithData_ShouldReturnValue_WhenDateIsPresent_MostRecentDate() throws Exception {
         assertTrue(zeroOrderHoldFunction_WithData.getValue(TODAY) == 0.65);
+    }
+
+    @Test
+    public void MapWithData_ShouldReturnValue_WhenDateIsPresent_DateInPast() throws Exception {
+        assertTrue(zeroOrderHoldFunction_WithData.getValue(ONE_WEEK_AGO) == 0.35);
     }
 
     @Test
