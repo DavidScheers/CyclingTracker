@@ -22,4 +22,8 @@ public class WorkoutIntensity {
     public double getPower() {
         return power;
     }
+
+    public double calculateTrainingStressScore(double ftp) {
+        return (workoutDuration.toMinutes()*60*power*(power/ftp)) / (ftp*360000);
+    }
 }
