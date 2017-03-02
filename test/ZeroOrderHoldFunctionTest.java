@@ -30,13 +30,13 @@ public class ZeroOrderHoldFunctionTest {
         valueMap_Empty = new HashMap<>();
         getData_ForMapWithData();
         valueMap_OnlyOneDataPoint_10YearsAgo = new HashMap<>();
-        getData_ForMapOnlyOneDataPoint_10YearsAgo();
+        getData_ForMapWithOnlyOneDataPoint_10YearsAgo();
         zeroOrderHoldFunction_WithData = new ZeroOrderHoldFunction(valueMap_WithData);
         zeroOrderHoldFunction_Empty = new ZeroOrderHoldFunction(valueMap_Empty);
         zeroOrderHoldFunction_OnlyOneDataPoint_10YearsAgo = new ZeroOrderHoldFunction(valueMap_OnlyOneDataPoint_10YearsAgo);
     }
 
-    private void getData_ForMapOnlyOneDataPoint_10YearsAgo() {
+    private void getData_ForMapWithOnlyOneDataPoint_10YearsAgo() {
         valueMap_OnlyOneDataPoint_10YearsAgo.put(REALLY_LONG_AGO, 0.8);
     }
 
