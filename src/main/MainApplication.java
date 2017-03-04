@@ -11,6 +11,7 @@ import main.Functions.DataBasedFunction;
 import main.Functions.Function;
 import main.Functions.PerformanceFunction;
 import main.PerformanceManagement.PerformanceManagementTool;
+import main.PerformanceManagement.WorkoutIntensity;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -28,12 +29,12 @@ public class MainApplication extends Application {
 
         // START
         PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(2));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), 0.9);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), 0.35);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), 0.4);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), 0.8);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), 0.4);
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), 0.65);
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), createWorkoutIntensity(30, 220)) ;
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), createWorkoutIntensity(30, 220));
         Function functionToPlot = performanceManagementTool.getFitnessFunction();
         XYChart.Series series = getData(functionToPlot, LocalDate.now().minusDays(30), 30);
         // STOP
@@ -46,6 +47,10 @@ public class MainApplication extends Application {
         Scene scene  = new Scene(pane,800,600);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private WorkoutIntensity createWorkoutIntensity(int duration, double power) {
+        return new WorkoutIntensity(duration, power);
     }
 
 
