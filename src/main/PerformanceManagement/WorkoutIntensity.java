@@ -7,16 +7,16 @@ import java.time.Duration;
  */
 public class WorkoutIntensity {
 
-    private Duration workoutDuration;
+    private int workoutDurationInMinutes;
     private double power;
 
-    public WorkoutIntensity(Duration workoutDuration, double power) {
-        this.workoutDuration = workoutDuration;
+    public WorkoutIntensity(int workoutDurationInMinutes, double power) {
+        this.workoutDurationInMinutes = workoutDurationInMinutes;
         power = power;
     }
 
-    public Duration getWorkoutDuration() {
-        return workoutDuration;
+    public int getWorkoutDuration() {
+        return workoutDurationInMinutes;
     }
 
     public double getPower() {
@@ -24,6 +24,6 @@ public class WorkoutIntensity {
     }
 
     public double calculateTrainingStressScore(double ftp) {
-        return (workoutDuration.toMinutes()*60*power*(power/ftp)) / (ftp*360000);
+        return (workoutDurationInMinutes*60*power*(power/ftp)) / (ftp*360000);
     }
 }
