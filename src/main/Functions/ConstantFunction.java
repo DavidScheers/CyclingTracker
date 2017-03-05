@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class ConstantFunction implements Function {
 
     public ConstantFunction(double value) {
         this.value = value;
+        listeners = new ArrayList<>();
     }
 
     private void notifyListeners() {

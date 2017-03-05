@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class DifferenceFunction implements Function {
     public DifferenceFunction(Function firstFunction, Function secondFunction) {
         this.firstFunction = firstFunction;
         this.secondFunction = secondFunction;
+        listeners = new ArrayList<>();
     }
 
     @Override

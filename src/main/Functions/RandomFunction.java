@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,5 +30,9 @@ public class RandomFunction implements Function {
         for (FunctionListener listener : listeners) {
             listener.changeDetected();
         }
+    }
+
+    public RandomFunction() {
+        listeners = new ArrayList<>();
     }
 }

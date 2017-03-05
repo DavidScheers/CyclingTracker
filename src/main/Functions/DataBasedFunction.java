@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class DataBasedFunction implements Function {
 
     public DataBasedFunction(Map<LocalDate, Double> valueMap) {
         this.valueMap = valueMap;
+        listeners = new ArrayList<>();
     }
 
     @Override

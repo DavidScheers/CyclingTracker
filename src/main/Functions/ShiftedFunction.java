@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ShiftedFunction implements Function {
     public ShiftedFunction(DifferenceFunction differenceFunction, int datesToShift) {
         this.differenceFunction = differenceFunction;
         this.datesToShift = datesToShift;
+        listeners = new ArrayList<>();
     }
 
     @Override

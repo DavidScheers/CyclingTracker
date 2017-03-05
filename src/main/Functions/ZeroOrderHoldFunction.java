@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,6 +18,7 @@ public class ZeroOrderHoldFunction implements Function {
 
     public ZeroOrderHoldFunction(Map<LocalDate, Double> valueMap) {
         this.valueMap = new TreeMap<>(valueMap);
+        listeners = new ArrayList<>();
     }
 
     @Override

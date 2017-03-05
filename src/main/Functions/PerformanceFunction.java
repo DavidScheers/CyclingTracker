@@ -3,6 +3,7 @@ package main.Functions;
 import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerformanceFunction implements Function {
@@ -16,6 +17,7 @@ public class PerformanceFunction implements Function {
         this.tssFunction = tssFunction;
         this.decayParameter = decayParameter;
         this.startDate = startDate;
+        listeners = new ArrayList<>();
     }
 
     @Override
