@@ -1,12 +1,16 @@
 package main.Functions;
 
+import main.Listener.FunctionListener;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class PerformanceFunction implements Function {
 
     private Function tssFunction;
     private double decayParameter;
     private LocalDate startDate;
+    private List<FunctionListener> listeners;
 
     public PerformanceFunction(Function tssFunction, double decayParameter, LocalDate startDate) {
         this.tssFunction = tssFunction;
@@ -16,11 +20,25 @@ public class PerformanceFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
+        double result;
         if (date.isBefore(startDate)) {
-            return 0.0;
+            result = 0.0;
         } else {
             double valueYesterday = getValueYesterday(date);
-            return valueYesterday + (getTss(date) - valueYesterday)*getFactor();
+            result = valueYesterday + (getTss(date) - valueYesterday)*getFactor();
+        }
+        notifyListeners();
+        return result;
+    }
+
+    @Override
+    public void addListener(FunctionListener functionListener) {
+        listeners.add(functionListener);
+    }
+
+    private void notifyListeners() {
+        for (FunctionListener listener : listeners) {
+            listener.changeDetected();
         }
     }
 
