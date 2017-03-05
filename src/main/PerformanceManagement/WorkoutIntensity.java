@@ -12,7 +12,7 @@ public class WorkoutIntensity {
 
     public WorkoutIntensity(int workoutDurationInMinutes, double power) {
         this.workoutDurationInMinutes = workoutDurationInMinutes;
-        power = power;
+        this.power = power;
     }
 
     public int getWorkoutDuration() {
