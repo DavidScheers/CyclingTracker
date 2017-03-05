@@ -29,7 +29,6 @@ public class ZeroOrderHoldFunction implements Function {
         } else {
             result = valueMap.containsKey(date) ? valueMap.get(date) : valueMap.get(valueMap.floorKey(date));
         }
-        notifyListeners();
         return result;
     }
 
@@ -38,9 +37,4 @@ public class ZeroOrderHoldFunction implements Function {
         listeners.add(functionListener);
     }
 
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
-    }
 }

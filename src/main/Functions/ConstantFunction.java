@@ -16,18 +16,12 @@ public class ConstantFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        notifyListeners();
         return value;
     }
 
     @Override
     public void addListener(FunctionListener functionListener) {
         listeners.add(functionListener);
-    }
-
-    public ConstantFunction(double value) {
-        this.value = value;
-        listeners = new ArrayList<>();
     }
 
     private void notifyListeners() {

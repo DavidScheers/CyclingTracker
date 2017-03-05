@@ -17,19 +17,12 @@ public class RandomFunction implements Function {
     @Override
     public double getValue(LocalDate date) {
         Random rand = new Random();
-        notifyListeners();
         return rand.nextDouble();
     }
 
     @Override
     public void addListener(FunctionListener functionListener) {
         listeners.add(functionListener);
-    }
-
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
     }
 
     public RandomFunction() {

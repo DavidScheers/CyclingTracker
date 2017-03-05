@@ -28,7 +28,6 @@ public class DataBasedFunction implements Function {
         } else {
             output = 0;
         }
-        notifyListeners();
         return output;
     }
 
@@ -37,9 +36,4 @@ public class DataBasedFunction implements Function {
         listeners.add(functionListener);
     }
 
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
-    }
 }

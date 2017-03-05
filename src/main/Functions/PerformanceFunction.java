@@ -29,19 +29,12 @@ public class PerformanceFunction implements Function {
             double valueYesterday = getValueYesterday(date);
             result = valueYesterday + (getTss(date) - valueYesterday)*getFactor();
         }
-        notifyListeners();
         return result;
     }
 
     @Override
     public void addListener(FunctionListener functionListener) {
         listeners.add(functionListener);
-    }
-
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
     }
 
     private double getValueYesterday(LocalDate date) {

@@ -23,7 +23,6 @@ public class DifferenceFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        notifyListeners();
         return firstFunction.getValue(date) - secondFunction.getValue(date);
     }
 
@@ -32,9 +31,4 @@ public class DifferenceFunction implements Function {
         listeners.add(functionListener);
     }
 
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
-    }
 }

@@ -23,7 +23,6 @@ public class ShiftedFunction implements Function {
 
     @Override
     public double getValue(LocalDate date) {
-        notifyListeners();
         return differenceFunction.getValue(date.minusDays(datesToShift));
     }
 
@@ -32,10 +31,5 @@ public class ShiftedFunction implements Function {
         listeners.add(functionListener);
     }
 
-    private void notifyListeners() {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
-    }
 }
 
