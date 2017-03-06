@@ -18,10 +18,8 @@ import static org.junit.Assert.assertEquals;
 public class DifferenceFunctionTest {
 
     private Function differenceFunction;
-    private Map<LocalDate, Double> valueMapFirst;
-    private Map<LocalDate, Double> valueMapSecond;
-    private Function firstFunction;
-    private Function secondFunction;
+    private DataBasedFunction firstFunction;
+    private DataBasedFunction secondFunction;
     private final LocalDate TODAY = LocalDate.now();
     private final LocalDate YESTERDAY = LocalDate.now().minusDays(1);
     private final LocalDate YESTERYESTERDAY = LocalDate.now().minusDays(2);
@@ -30,26 +28,24 @@ public class DifferenceFunctionTest {
 
     @Before
     public void setUp() {
-        valueMapFirst = new HashMap<>();
-        valueMapSecond = new HashMap<>();
+        firstFunction = new DataBasedFunction();
+        secondFunction = new DataBasedFunction();
+        differenceFunction = new DifferenceFunction(firstFunction, secondFunction);
         getDataForFirstFunction();
         getDataForSecondFunction();
-        firstFunction = new DataBasedFunction(valueMapFirst);
-        secondFunction = new DataBasedFunction(valueMapSecond);
-        differenceFunction = new DifferenceFunction(firstFunction, secondFunction);
     }
 
     private void getDataForFirstFunction() {
-        valueMapFirst.put(TODAY, 5.0);
-        valueMapFirst.put(YESTERDAY, 6.0);
-        valueMapFirst.put(ONE_WEEK_AGO, 10.0);
-        valueMapFirst.put(LONG_AGO, 20.0);
+        firstFunction.addValue(TODAY, 5.0);
+        firstFunction.addValue(YESTERDAY, 6.0);
+        firstFunction.addValue(ONE_WEEK_AGO, 10.0);
+        firstFunction.addValue(LONG_AGO, 20.0);
     }
 
     private void getDataForSecondFunction() {
-        valueMapSecond.put(TODAY, 10.0);
-        valueMapSecond.put(YESTERDAY, 2.0);
-        valueMapSecond.put(ONE_WEEK_AGO, 6.0);
+        secondFunction.addValue(TODAY, 10.0);
+        secondFunction.addValue(YESTERDAY, 2.0);
+        secondFunction.addValue(ONE_WEEK_AGO, 6.0);
     }
 
     @Test
