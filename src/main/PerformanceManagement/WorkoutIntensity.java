@@ -1,7 +1,5 @@
 package main.PerformanceManagement;
 
-import java.time.Duration;
-
 /**
  * Created by davids on 2/03/2017.
  */

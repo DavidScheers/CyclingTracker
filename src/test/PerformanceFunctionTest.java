@@ -1,3 +1,5 @@
+package test;
+
 import main.Functions.DataBasedFunction;
 import main.Functions.Function;
 import main.Functions.PerformanceFunction;
@@ -8,7 +10,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by davids on 28/02/2017.

@@ -1,3 +1,5 @@
+package test;
+
 import main.Functions.Function;
 import main.Functions.ZeroOrderHoldFunction;
 import org.junit.Before;

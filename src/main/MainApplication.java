@@ -7,15 +7,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.Functions.DataBasedFunction;
 import main.Functions.Function;
-import main.Functions.PerformanceFunction;
 import main.PerformanceManagement.PerformanceManagementTool;
 import main.PerformanceManagement.WorkoutIntensity;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class MainApplication extends Application {

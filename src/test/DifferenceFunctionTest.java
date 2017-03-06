@@ -1,7 +1,8 @@
+package test;
+
 import main.Functions.DataBasedFunction;
 import main.Functions.DifferenceFunction;
 import main.Functions.Function;
-import main.Functions.PerformanceFunction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by davids on 28/02/2017.
@@ -63,12 +64,12 @@ public class DifferenceFunctionTest {
 
     @Test
     public void getValue_OnOneWeekAgo_ShouldReturnEigth() throws Exception {
-        assertEquals(differenceFunction.getValue(TODAY), 8.0, 0.0001);
+        assertEquals(differenceFunction.getValue(ONE_WEEK_AGO), 4.0, 0.0001);
     }
 
     @Test
-    public void getValue_OnDayPresentInFirstNotInSecond_ShouldReturnMinusFive() throws Exception {
-        //assertEquals();
+    public void getValue_OnDayPresentInFirstNotInSecond_ShouldReturnValueOfFirst() throws Exception {
+        assertEquals(differenceFunction.getValue(LONG_AGO), 20, 0.0001);
     }
 
 }
