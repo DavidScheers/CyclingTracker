@@ -8,23 +8,19 @@ import java.util.Map;
 
 public class PerformanceManagementTool implements PerformanceManagement {
 
-    private Map<LocalDate, Double> tssMap;
+    private DataBasedFunction tssFunction;
     private Map<LocalDate, Double> ftpMap;
     private LocalDate startOfTrackingDate;
 
     public PerformanceManagementTool(LocalDate startOfTrackingDate) {
-        this.tssMap = new HashMap<>();
         this.startOfTrackingDate = startOfTrackingDate;
         this.ftpMap = new HashMap<>();
+        tssFunction = new DataBasedFunction();
     }
 
     @Override
     public void addTrainingsDay(LocalDate date, WorkoutIntensity intensity) {
-        if (tssMap.containsKey(date)) {
-            tssMap.put(date, getUpdatedTss(date, intensity));
-        } else {
-            tssMap.put(date, getTrainingStressScore(date, intensity));
-        }
+        tssFunction.addValue(date, getTrainingStressScore(date, intensity));
     }
 
     @Override
@@ -43,7 +39,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
     }
 
     private DataBasedFunction getTssFunction() {
-        return new DataBasedFunction(tssMap);
+        return tssFunction;
     }
 
     @Override
@@ -55,10 +51,6 @@ public class PerformanceManagementTool implements PerformanceManagement {
     public Function getFormFunction() {
         DifferenceFunction differenceFunction = new DifferenceFunction(getFitnessFunction(), getFatigueFunction());
         return new ShiftedFunction(differenceFunction, 1);
-    }
-
-    private double getUpdatedTss(LocalDate date, WorkoutIntensity intensity) {
-        return tssMap.get(date) + getTrainingStressScore(date, intensity);
     }
 
     private double getTrainingStressScore(LocalDate date, WorkoutIntensity intensity) {
