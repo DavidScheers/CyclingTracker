@@ -5,19 +5,17 @@ import main.Listener.FunctionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 import java.util.TreeMap;
 
-/**
- * Created by davids on 2/03/2017.
- */
+
 public class ZeroOrderHoldFunction implements Function {
 
     private TreeMap<LocalDate, Double> valueMap;
     private List<FunctionListener> listeners;
 
-    public ZeroOrderHoldFunction(Map<LocalDate, Double> valueMap) {
-        this.valueMap = new TreeMap<>(valueMap);
+    public ZeroOrderHoldFunction() {
+        valueMap = new TreeMap<>();
         listeners = new ArrayList<>();
     }
 
@@ -35,6 +33,18 @@ public class ZeroOrderHoldFunction implements Function {
     @Override
     public void addListener(FunctionListener functionListener) {
         listeners.add(functionListener);
+    }
+
+    public void addValue(LocalDate date, Double value) {
+        if (valueMap.containsKey(date)) {
+            valueMap.put(date, getUpdatedValue(date, value));
+        } else {
+            valueMap.put(date, value);
+        }
+    }
+
+    private Double getUpdatedValue(LocalDate date, Double value) {
+        return valueMap.get(date) + value;
     }
 
 }

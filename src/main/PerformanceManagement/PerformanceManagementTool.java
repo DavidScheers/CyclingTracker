@@ -9,13 +9,13 @@ import java.util.Map;
 public class PerformanceManagementTool implements PerformanceManagement {
 
     private DataBasedFunction tssFunction;
-    private Map<LocalDate, Double> ftpMap;
+    private ZeroOrderHoldFunction ftpFunction;
     private LocalDate startOfTrackingDate;
 
     public PerformanceManagementTool(LocalDate startOfTrackingDate) {
         this.startOfTrackingDate = startOfTrackingDate;
-        this.ftpMap = new HashMap<>();
         tssFunction = new DataBasedFunction();
+        ftpFunction = new ZeroOrderHoldFunction();
     }
 
     @Override
@@ -25,12 +25,12 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public void addNewFtpMeasurement(LocalDate date, double ftp) {
-        ftpMap.put(date, ftp);
+        ftpFunction.addValue(date, ftp);
     }
 
     @Override
     public Function getFtpFunction() {
-        return new ZeroOrderHoldFunction(ftpMap);
+        return ftpFunction;
     }
 
     @Override
