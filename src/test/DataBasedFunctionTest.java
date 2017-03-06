@@ -13,23 +13,22 @@ import static org.junit.Assert.assertEquals;
 
 public class DataBasedFunctionTest {
 
-    private Function dataBasedFunction;
-    private Map<LocalDate, Double> valueMap;
+    private DataBasedFunction dataBasedFunction;
     private final LocalDate TODAY = LocalDate.now();
     private final LocalDate YESTERDAY = LocalDate.now().minusDays(1);
     private final LocalDate ONE_WEEK_AGO = LocalDate.now().minusDays(7);
 
     @Before
     public void setUp() {
-        valueMap = new HashMap<>();
+        dataBasedFunction = new DataBasedFunction();
         getData();
-        dataBasedFunction = new DataBasedFunction(valueMap);
+
     }
 
     private void getData() {
-        valueMap.put(TODAY, 5.0);
-        valueMap.put(YESTERDAY, 6.0);
-        valueMap.put(ONE_WEEK_AGO, 10.0);
+        dataBasedFunction.addValue(TODAY, 5.0);
+        dataBasedFunction.addValue(YESTERDAY, 6.0);
+        dataBasedFunction.addValue(ONE_WEEK_AGO, 10.0);
     }
 
     @Test
