@@ -3,8 +3,6 @@ package main.PerformanceManagement;
 import main.Functions.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PerformanceManagementTool implements PerformanceManagement {
 
