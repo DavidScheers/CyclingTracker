@@ -4,19 +4,17 @@ import main.Listener.FunctionListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by davids on 27/02/2017.
- */
 public class DataBasedFunction implements Function {
 
     private Map<LocalDate, Double>  valueMap;
     private List<FunctionListener> listeners;
 
-    public DataBasedFunction(Map<LocalDate, Double> valueMap) {
-        this.valueMap = valueMap;
+    public DataBasedFunction() {
+        valueMap = new HashMap<>();
         listeners = new ArrayList<>();
     }
 
@@ -34,6 +32,18 @@ public class DataBasedFunction implements Function {
     @Override
     public void addListener(FunctionListener functionListener) {
         listeners.add(functionListener);
+    }
+
+    public void addValue(LocalDate date, Double value) {
+        if (valueMap.containsKey(date)) {
+            valueMap.put(date, getUpdatedValue(date, value));
+        } else {
+            valueMap.put(date, value);
+        }
+    }
+
+    private double getUpdatedValue(LocalDate date, Double value) {
+        return valueMap.get(date) + value;
     }
 
 }
