@@ -19,13 +19,11 @@ public class PerformanceManagementTool implements PerformanceManagement {
     @Override
     public void addTrainingsDay(LocalDate date, WorkoutIntensity intensity) {
         tssFunction.addValue(date, getTrainingStressScore(date, intensity));
-        notifyListeners();
     }
 
     @Override
     public void addNewFtpMeasurement(LocalDate date, double ftp) {
         ftpFunction.addValue(date, ftp);
-        notifyListeners();
     }
 
     @Override
@@ -57,7 +55,4 @@ public class PerformanceManagementTool implements PerformanceManagement {
         return intensity.calculateTrainingStressScore(getFtpFunction().getValue(date));
     }
 
-    private void notifyListeners() {
-
-    }
 }
