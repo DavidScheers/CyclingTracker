@@ -43,7 +43,7 @@ public class ShiftedFunctionTest {
     public void getValueToday_ShouldBySameAs_FunctionToShiftYesterday_IfDatesToShiftIsOne() throws Exception {
         Assertions.assertThat(shiftedFunction.getValue(TODAY)).isEqualTo(functionToShift.getValue(YESTERDAY));
     }
-
+    /*
     @Test
     public void afterRegisteringListenerOnFirstFunction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
         FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
@@ -55,4 +55,5 @@ public class ShiftedFunctionTest {
         tssFunction.addValue(TODAY, 0.55);
         verify(mockedFunctionListener).changeDetected();
     }
+    */
 }
