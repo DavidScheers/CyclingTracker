@@ -25,12 +25,16 @@ public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
     }
 
     public void addValue(LocalDate date, Double value) {
+        addToMap(date, value);
+        notifyListeners(listeners);
+    }
+
+    private void addToMap(LocalDate date, Double value) {
         if (valueMap.containsKey(date)) {
             valueMap.put(date, getUpdatedValue(date, value));
         } else {
             valueMap.put(date, value);
         }
-        notifyListeners(listeners);
     }
 
     private Double getUpdatedValue(LocalDate date, Double value) {
