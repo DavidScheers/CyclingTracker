@@ -8,6 +8,7 @@ public class DifferenceFunction extends FunctionBaseImplementation {
     private Function secondFunction;
 
     public DifferenceFunction(Function firstFunction, Function secondFunction) {
+        super();
         this.firstFunction = firstFunction;
         this.secondFunction = secondFunction;
     }
