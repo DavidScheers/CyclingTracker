@@ -15,11 +15,9 @@ public class DataBasedFunction extends FunctionBaseImplementation {
 
     @Override
     public double getValue(LocalDate inputDate) {
-        double output;
+        double output = 0;
         if (valueMap.containsKey(inputDate)) {
             output = valueMap.get(inputDate);
-        } else {
-            output = 0;
         }
         return output;
     }
