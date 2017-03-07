@@ -1,4 +1,4 @@
-package main.Listener;
+package Listener;
 
 
 public interface FunctionListener {

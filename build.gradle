@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+group = 'be.scheers.CyclingTracker'
+version = '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+defaultTasks 'clean', 'build'
+
+idea {
+    module {
+        excludeDirs += file('.idea')
+        excludeDirs += file('build')
+    }
+}
+
+jar {
+    baseName = 'CyclingTracker'
+    version = version
+    manifest {
+        attributes 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.6.8'
+    testCompile 'org.assertj:assertj-core:3.6.1'
+}

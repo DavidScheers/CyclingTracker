@@ -1,32 +1,32 @@
-package main.Functions;
+package Functions;
 
-import main.Listener.FunctionListener;
-
+import Listener.FunctionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class DataBasedFunction implements Function {
+import java.util.TreeMap;
 
-    private Map<LocalDate, Double>  valueMap;
+
+public class ZeroOrderHoldFunction implements Function {
+
+    private TreeMap<LocalDate, Double> valueMap;
     private List<FunctionListener> listeners;
 
-    public DataBasedFunction() {
-        valueMap = new HashMap<>();
+    public ZeroOrderHoldFunction() {
+        valueMap = new TreeMap<>();
         listeners = new ArrayList<>();
     }
 
     @Override
-    public double getValue(LocalDate inputDate) {
-        double output;
-        if (valueMap.containsKey(inputDate)) {
-            output = valueMap.get(inputDate);
+    public double getValue(LocalDate date) {
+        double result;
+        if (valueMap.isEmpty() || date.isBefore(valueMap.firstKey())) {
+            result = 0.0;
         } else {
-            output = 0;
+            result = valueMap.containsKey(date) ? valueMap.get(date) : valueMap.get(valueMap.floorKey(date));
         }
-        return output;
+        return result;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DataBasedFunction implements Function {
         }
     }
 
-    private double getUpdatedValue(LocalDate date, Double value) {
+    private Double getUpdatedValue(LocalDate date, Double value) {
         return valueMap.get(date) + value;
     }
 

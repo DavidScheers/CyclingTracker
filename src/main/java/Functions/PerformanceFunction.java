@@ -1,7 +1,6 @@
-package main.Functions;
+package Functions;
 
-import main.Listener.FunctionListener;
-
+import Listener.FunctionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

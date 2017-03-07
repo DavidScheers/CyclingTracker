@@ -1,14 +1,10 @@
-package test;
-
-import main.Functions.DataBasedFunction;
-import main.Functions.DifferenceFunction;
-import main.Functions.Function;
+import Functions.DataBasedFunction;
+import Functions.DifferenceFunction;
+import Functions.Function;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 

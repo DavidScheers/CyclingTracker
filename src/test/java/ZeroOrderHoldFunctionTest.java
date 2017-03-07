@@ -1,13 +1,9 @@
-package test;
-
-import main.Functions.Function;
-import main.Functions.ZeroOrderHoldFunction;
+import Functions.Function;
+import Functions.ZeroOrderHoldFunction;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 

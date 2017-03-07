@@ -1,6 +1,4 @@
-package test;
-
-import main.Functions.DataBasedFunction;
+import Functions.DataBasedFunction;
 import org.junit.Before;
 import org.junit.Test;
 

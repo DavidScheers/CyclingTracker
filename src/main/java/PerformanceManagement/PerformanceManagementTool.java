@@ -1,6 +1,6 @@
-package main.PerformanceManagement;
+package PerformanceManagement;
 
-import main.Functions.*;
+import Functions.*;
 
 import java.time.LocalDate;
 
@@ -19,11 +19,13 @@ public class PerformanceManagementTool implements PerformanceManagement {
     @Override
     public void addTrainingsDay(LocalDate date, WorkoutIntensity intensity) {
         tssFunction.addValue(date, getTrainingStressScore(date, intensity));
+        notifyListeners();
     }
 
     @Override
     public void addNewFtpMeasurement(LocalDate date, double ftp) {
         ftpFunction.addValue(date, ftp);
+        notifyListeners();
     }
 
     @Override
@@ -53,5 +55,9 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     private double getTrainingStressScore(LocalDate date, WorkoutIntensity intensity) {
         return intensity.calculateTrainingStressScore(getFtpFunction().getValue(date));
+    }
+
+    private void notifyListeners() {
+
     }
 }

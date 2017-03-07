@@ -1,10 +1,8 @@
-package test;
-
-import main.Functions.Function;
-import main.PerformanceManagement.PerformanceManagementTool;
 import static org.junit.Assert.*;
 
-import main.PerformanceManagement.WorkoutIntensity;
+import Functions.Function;
+import PerformanceManagement.PerformanceManagementTool;
+import PerformanceManagement.WorkoutIntensity;
 import org.junit.Before;
 import org.junit.Test;
 

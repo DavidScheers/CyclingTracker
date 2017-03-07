@@ -1,8 +1,5 @@
-package main.PerformanceManagement;
+package PerformanceManagement;
 
-/**
- * Created by davids on 2/03/2017.
- */
 public class WorkoutIntensity {
 
     private int workoutDurationInMinutes;

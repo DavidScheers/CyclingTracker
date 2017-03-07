@@ -1,8 +1,6 @@
-package test;
-
-import main.Functions.DataBasedFunction;
-import main.Functions.Function;
-import main.Functions.PerformanceFunction;
+import Functions.DataBasedFunction;
+import Functions.Function;
+import Functions.PerformanceFunction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,9 +8,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by davids on 28/02/2017.
- */
+
 public class PerformanceFunctionTest {
 
     private Function performanceFunction;

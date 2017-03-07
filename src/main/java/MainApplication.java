@@ -1,5 +1,6 @@
-package main;
-
+import Functions.Function;
+import PerformanceManagement.PerformanceManagementTool;
+import PerformanceManagement.WorkoutIntensity;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -7,9 +8,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.Functions.Function;
-import main.PerformanceManagement.PerformanceManagementTool;
-import main.PerformanceManagement.WorkoutIntensity;
 
 import java.time.LocalDate;
 
@@ -25,12 +23,8 @@ public class MainApplication extends Application {
 
         // START
         PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(2));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), createWorkoutIntensity(30, 220)) ;
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), createWorkoutIntensity(30, 220));
+        getDataInTool(performanceManagementTool);
+        performanceManagementTool.addNewFtpMeasurement(LocalDate.now().minusDays(30), 230);
         Function functionToPlot = performanceManagementTool.getFitnessFunction();
         XYChart.Series series = getData(functionToPlot, LocalDate.now().minusDays(30), 30);
         // STOP
@@ -43,6 +37,15 @@ public class MainApplication extends Application {
         Scene scene  = new Scene(pane,800,600);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void getDataInTool(PerformanceManagementTool performanceManagementTool) {
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), createWorkoutIntensity(30, 220)) ;
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), createWorkoutIntensity(30, 220));
     }
 
     private WorkoutIntensity createWorkoutIntensity(int duration, double power) {
