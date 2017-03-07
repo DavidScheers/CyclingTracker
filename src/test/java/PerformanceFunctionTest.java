@@ -47,7 +47,7 @@ public class PerformanceFunctionTest {
     }
 
     @Test
-    public void afterRegisteringListenerOnTssFUnction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
+    public void subscribe_afterRegisteringListenerOnTssFUnction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
         FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
         tssFunction.addListener(mockedFunctionListener);
         tssFunction.addValue(TODAY, 0.6);
