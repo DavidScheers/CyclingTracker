@@ -1,22 +1,18 @@
 package Functions;
 
-import Listener.FunctionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class PerformanceFunction implements Function {
+public class PerformanceFunction extends FunctionBaseImplementation {
 
     private Function tssFunction;
     private double decayParameter;
     private LocalDate startDate;
-    private List<FunctionListener> listeners;
 
     public PerformanceFunction(Function tssFunction, double decayParameter, LocalDate startDate) {
+        super();
         this.tssFunction = tssFunction;
         this.decayParameter = decayParameter;
         this.startDate = startDate;
-        listeners = new ArrayList<>();
     }
 
     @Override
@@ -31,11 +27,6 @@ public class PerformanceFunction implements Function {
         return result;
     }
 
-    @Override
-    public void addListener(FunctionListener functionListener) {
-        listeners.add(functionListener);
-    }
-
     private double getValueYesterday(LocalDate date) {
         return this.getValue(date.minusDays(1));
     }
@@ -47,5 +38,6 @@ public class PerformanceFunction implements Function {
     private double getFactor() {
         return (1-Math.exp(-1/decayParameter));
     }
+
 
 }
