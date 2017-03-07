@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class FunctionBaseImplementation implements Function {
 
-    public List<FunctionListener> listeners;
+    List<FunctionListener> listeners;
 
     public FunctionBaseImplementation() {
         this.listeners = new ArrayList<>();
