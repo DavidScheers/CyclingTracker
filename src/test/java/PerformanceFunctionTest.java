@@ -1,12 +1,15 @@
 import Functions.DataBasedFunction;
 import Functions.Function;
 import Functions.PerformanceFunction;
+import Listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
 
 public class PerformanceFunctionTest {
@@ -41,6 +44,14 @@ public class PerformanceFunctionTest {
     @Test
     public void getValue_StartDateBeforeFirstTraining() throws Exception {
         assertEquals(performanceFunction.getValue(LONG_AGO.minusDays(1)), 0.0, 0.0001);
+    }
+
+    @Test
+    public void afterRegisteringListenerOnTssFUnction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
+        FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
+        tssFunction.addListener(mockedFunctionListener);
+        tssFunction.addValue(TODAY, 0.6);
+        verify(mockedFunctionListener).changeDetected();
     }
 
 }
