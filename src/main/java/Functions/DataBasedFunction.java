@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataBasedFunction extends FunctionBaseImplementation implements Function {
+public class DataBasedFunction extends FunctionBaseImplementation {
 
     private Map<LocalDate, Double>  valueMap;
 

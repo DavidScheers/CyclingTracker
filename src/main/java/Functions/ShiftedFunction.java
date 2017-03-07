@@ -2,7 +2,7 @@ package Functions;
 
 import java.time.LocalDate;
 
-public class ShiftedFunction extends FunctionBaseImplementation implements Function {
+public class ShiftedFunction extends FunctionBaseImplementation {
 
     private DifferenceFunction differenceFunction;
     private int datesToShift;

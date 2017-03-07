@@ -2,7 +2,7 @@ package Functions;
 
 import java.time.LocalDate;
 
-public class DifferenceFunction extends FunctionBaseImplementation implements Function {
+public class DifferenceFunction extends FunctionBaseImplementation {
 
     private Function firstFunction;
     private Function secondFunction;

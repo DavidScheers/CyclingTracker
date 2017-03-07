@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.TreeMap;
 
 
-public class ZeroOrderHoldFunction extends FunctionBaseImplementation implements Function {
+public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
 
     private TreeMap<LocalDate, Double> valueMap;
 
