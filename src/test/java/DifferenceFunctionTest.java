@@ -4,6 +4,7 @@ import Functions.DataBasedFunction;
 import Functions.DifferenceFunction;
 import Functions.Function;
 import Listener.FunctionListener;
+import com.sun.deploy.ui.DeployEmbeddedFrameIf;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -15,7 +16,8 @@ import static org.junit.Assert.assertEquals;
 
 public class DifferenceFunctionTest {
 
-    private Function differenceFunction;
+    private DifferenceFunction differenceFunction;
+    private DifferenceFunction differenceFunctionForListenerTest;
     private DataBasedFunction firstFunction;
     private DataBasedFunction secondFunction;
     private final LocalDate TODAY = LocalDate.now();
@@ -26,11 +28,16 @@ public class DifferenceFunctionTest {
 
     @Before
     public void setUp() {
+        DataBasedFunction mockedDBOne = Mockito.mock(DataBasedFunction.class);
+        when(mockedDBOne.getValue(YESTERDAY)).thenReturn(10.0);
+        DataBasedFunction mockedDBTwo = Mockito.mock(DataBasedFunction.class);
+        when(mockedDBOne.getValue(YESTERDAY)).thenReturn(5.0);
+        differenceFunctionForListenerTest = new DifferenceFunction(mockedDBOne, mockedDBTwo);
         firstFunction = new DataBasedFunction();
         secondFunction = new DataBasedFunction();
-        differenceFunction = new DifferenceFunction(firstFunction, secondFunction);
         getDataForFirstFunction();
         getDataForSecondFunction();
+        differenceFunction = new DifferenceFunction(firstFunction, secondFunction);
     }
 
     private void getDataForFirstFunction() {
@@ -68,18 +75,10 @@ public class DifferenceFunctionTest {
 
     @Test
     public void afterRegisteringListenerOnFirstFunction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
-        FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
-        firstFunction.addListener(mockedFunctionListener);
-        firstFunction.addValue(ONE_WEEK_AGO.plusDays(1), 5.0);
-        verify(mockedFunctionListener).changeDetected();
-    }
+        FunctionListener mockedListener = Mockito.mock(FunctionListener.class);
+        differenceFunctionForListenerTest.addListener(mockedListener);
+        differenceFunctionForListenerTest.changeDetected();
+        verify(mockedListener).changeDetected();
 
-    @Test
-    public void afterRegisteringListenerOnSecondFunction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
-        FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
-        secondFunction.addListener(mockedFunctionListener);
-        secondFunction.addValue(ONE_WEEK_AGO.plusDays(1), 5.0);
-        verify(mockedFunctionListener).changeDetected();
     }
-// Dus ge wilt testen dat als ge een listener registreert dat die wordt aangeroepen als uw functie wijzigt
 }
