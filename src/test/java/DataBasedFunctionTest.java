@@ -1,10 +1,12 @@
 import Functions.DataBasedFunction;
+import Listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.mockito.Mockito;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
 public class DataBasedFunctionTest {
 
@@ -41,5 +43,12 @@ public class DataBasedFunctionTest {
         assertEquals(dataBasedFunction.getValue(ONE_WEEK_AGO.plusDays(1)), 0.0, 0.0001);
     }
 
+    @Test
+    public void afterRegisteringListener_ListenersGetsCalledWhenDataBasedFunctionChanges() throws Exception {
+        FunctionListener mockedDifferenceFunctionListener = Mockito.mock(FunctionListener.class);
+        dataBasedFunction.addListener(mockedDifferenceFunctionListener);
+        dataBasedFunction.addValue(ONE_WEEK_AGO.plusDays(1), 5.0);
+        verify(mockedDifferenceFunctionListener).changeDetected();
+    }
 
 }
