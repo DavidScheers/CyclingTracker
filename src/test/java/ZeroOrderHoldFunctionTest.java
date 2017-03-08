@@ -1,11 +1,14 @@
 import Functions.Function;
 import Functions.ZeroOrderHoldFunction;
+import Listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 
 public class ZeroOrderHoldFunctionTest {
 
@@ -67,6 +70,14 @@ public class ZeroOrderHoldFunctionTest {
     @Test
     public void MapWithOnlyOneDataPoint_10YearsAgo_ShouldReturnPreviousValue_InNoTime() throws Exception {
         assertFunctionValueAtDay(zeroOrderHoldFunction_OnlyOneDataPoint_10YearsAgo, REALLY_LONG_AGO, 0.8);
+    }
+
+    @Test
+    public void afterRegisteringListener_ListenersGetsCalledWhenZeroOrderHoldFunctionChanges() throws Exception {
+        FunctionListener mockedListener = Mockito.mock(FunctionListener.class);
+        zeroOrderHoldFunction_WithData.addListener(mockedListener);
+        zeroOrderHoldFunction_WithData.addValue(TODAY, 0.55);
+        verify(mockedListener).changeDetected();
     }
 
     private void assertFunctionValueAtDay(Function f, LocalDate date, double value) {
