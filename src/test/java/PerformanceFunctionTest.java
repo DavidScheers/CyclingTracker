@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 
 public class PerformanceFunctionTest {
 
-    private Function performanceFunction;
+    private PerformanceFunction performanceFunction;
     private DataBasedFunction tssFunction;
     private final LocalDate TODAY = LocalDate.now();
     private final LocalDate YESTERDAY = LocalDate.now().minusDays(1);
@@ -48,10 +48,10 @@ public class PerformanceFunctionTest {
 
     @Test
     public void subscribe_afterRegisteringListenerOnTssFUnction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
-        FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
-        tssFunction.addListener(mockedFunctionListener);
-        tssFunction.addValue(TODAY, 0.6);
-        verify(mockedFunctionListener).changeDetected();
+        FunctionListener mockedListener = Mockito.mock(FunctionListener.class);
+        performanceFunction.addListener(mockedListener);
+        performanceFunction.changeDetected();
+        verify(mockedListener).changeDetected();
     }
 
 }
