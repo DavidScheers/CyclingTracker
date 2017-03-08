@@ -7,12 +7,13 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ShiftedFunctionTest {
 
-    private Function shiftedFunction;
+    private ShiftedFunction shiftedFunction;
     private DifferenceFunction functionToShift;
     private final LocalDate TODAY = LocalDate.now();
     private final LocalDate YESTERDAY = LocalDate.now().minusDays(1);
@@ -22,7 +23,11 @@ public class ShiftedFunctionTest {
 
     @Before
     public void setUp() {
-        functionToShift = new DifferenceFunction(one, two);
+        PerformanceFunction mockedPerfFuncOne = Mockito.mock(PerformanceFunction.class);
+        when(mockedPerfFuncOne.getValue(YESTERDAY)).thenReturn(5.0);
+        PerformanceFunction mockedPerfFuncOTwo = Mockito.mock(PerformanceFunction.class);
+        when(mockedPerfFuncOTwo.getValue(YESTERDAY)).thenReturn(2.0);
+        functionToShift = new DifferenceFunction(mockedPerfFuncOne, mockedPerfFuncOTwo);
         shiftedFunction = new ShiftedFunction(functionToShift, 1);
     }
 
@@ -30,12 +35,13 @@ public class ShiftedFunctionTest {
     public void getValueToday_ShouldBySameAs_FunctionToShiftYesterday_IfDatesToShiftIsOne() throws Exception {
         Assertions.assertThat(shiftedFunction.getValue(TODAY)).isEqualTo(functionToShift.getValue(YESTERDAY));
     }
-    /*
+
     @Test
-    public void afterRegisteringListenerOnFirstFunction_ListenerGetsCalledWhenChangeIsDetected() throws Exception {
-        FunctionListener mockedFunctionListener = Mockito.mock(FunctionListener.class);
-        functionToShift.addListener(mockedFunctionListener);
-        verify(mockedFunctionListener).changeDetected();
+    public void afterRegisteringListenerOnDiffFunction_ListenerGetsCalledWhenChangeIsDetectedInDiffFunction() throws Exception {
+        FunctionListener mockedListener = Mockito.mock(FunctionListener.class);
+        shiftedFunction.addListener(mockedListener);
+        shiftedFunction.changeDetected();
+        verify(mockedListener).changeDetected();
     }
-    */
+
 }
