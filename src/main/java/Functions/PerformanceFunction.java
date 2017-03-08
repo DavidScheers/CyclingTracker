@@ -1,8 +1,10 @@
 package Functions;
 
+import Listener.FunctionListener;
+
 import java.time.LocalDate;
 
-public class PerformanceFunction extends FunctionBaseImplementation {
+public class PerformanceFunction extends FunctionBaseImplementation implements FunctionListener {
 
     private Function tssFunction;
     private double decayParameter;
@@ -13,6 +15,7 @@ public class PerformanceFunction extends FunctionBaseImplementation {
         this.tssFunction = tssFunction;
         this.decayParameter = decayParameter;
         this.startDate = startDate;
+        subscribeToListeners();
     }
 
     @Override
@@ -39,5 +42,13 @@ public class PerformanceFunction extends FunctionBaseImplementation {
         return (1-Math.exp(-1/decayParameter));
     }
 
+    private void subscribeToListeners() {
+        tssFunction.addListener(this);
+    }
 
+
+    @Override
+    public void changeDetected() {
+        notifyListeners(listeners);
+    }
 }

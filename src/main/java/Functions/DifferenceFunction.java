@@ -1,8 +1,10 @@
 package Functions;
 
+import Listener.FunctionListener;
+
 import java.time.LocalDate;
 
-public class DifferenceFunction extends FunctionBaseImplementation {
+public class DifferenceFunction extends FunctionBaseImplementation implements FunctionListener {
 
     private Function firstFunction;
     private Function secondFunction;
@@ -11,11 +13,22 @@ public class DifferenceFunction extends FunctionBaseImplementation {
         super();
         this.firstFunction = firstFunction;
         this.secondFunction = secondFunction;
+        subscribeToListeners();
     }
 
     @Override
     public double getValue(LocalDate date) {
         return firstFunction.getValue(date) - secondFunction.getValue(date);
+    }
+
+    @Override
+    public void changeDetected() {
+        notifyListeners(listeners);
+    }
+
+    public void subscribeToListeners() {
+        firstFunction.addListener(this);
+        secondFunction.addListener(this);
     }
 
 }

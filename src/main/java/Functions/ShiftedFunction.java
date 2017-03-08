@@ -1,8 +1,10 @@
 package Functions;
 
+import Listener.FunctionListener;
+
 import java.time.LocalDate;
 
-public class ShiftedFunction extends FunctionBaseImplementation {
+public class ShiftedFunction extends FunctionBaseImplementation implements FunctionListener {
 
     private DifferenceFunction differenceFunction;
     private int datesToShift;
@@ -11,6 +13,7 @@ public class ShiftedFunction extends FunctionBaseImplementation {
         super();
         this.differenceFunction = differenceFunction;
         this.datesToShift = datesToShift;
+        subscribeToListeners();
     }
 
     @Override
@@ -18,5 +21,13 @@ public class ShiftedFunction extends FunctionBaseImplementation {
         return differenceFunction.getValue(date.minusDays(datesToShift));
     }
 
+    private void subscribeToListeners() {
+        differenceFunction.addListener(this);
+    }
+
+    @Override
+    public void changeDetected() {
+        notifyListeners(listeners);
+    }
 }
 
