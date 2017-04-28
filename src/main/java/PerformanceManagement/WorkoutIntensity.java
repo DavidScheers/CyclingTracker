@@ -1,4 +1,4 @@
-package PerformanceManagement;
+package performancemanagement;
 
 public class WorkoutIntensity {
 

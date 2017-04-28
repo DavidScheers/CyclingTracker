@@ -1,7 +1,6 @@
-import Functions.DataBasedFunction;
-import Functions.Function;
-import Functions.PerformanceFunction;
-import Listener.FunctionListener;
+import functions.DataBasedFunction;
+import functions.PerformanceFunction;
+import listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

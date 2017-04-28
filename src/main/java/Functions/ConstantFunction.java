@@ -1,7 +1,7 @@
-package Functions;
+package functions;
 
 
-import Listener.FunctionListener;
+import listener.FunctionListener;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +13,10 @@ public class ConstantFunction implements Function {
 
     private double value;
     private List<FunctionListener> listeners;
+
+    public ConstantFunction(double value) {
+        this.value = value;
+    }
 
     @Override
     public double getValue(LocalDate date) {
@@ -29,4 +33,6 @@ public class ConstantFunction implements Function {
             listener.changeDetected();
         }
     }
+
+
 }

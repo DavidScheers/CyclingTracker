@@ -1,6 +1,6 @@
-package PerformanceManagement;
+package performancemanagement;
 
-import Functions.*;
+import functions.*;
 
 import java.time.LocalDate;
 

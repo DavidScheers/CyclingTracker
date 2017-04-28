@@ -1,6 +1,6 @@
-import Functions.Function;
-import PerformanceManagement.PerformanceManagementTool;
-import PerformanceManagement.WorkoutIntensity;
+import functions.Function;
+import performancemanagement.PerformanceManagementTool;
+import performancemanagement.WorkoutIntensity;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -22,9 +22,9 @@ public class MainApplication extends Application {
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
 
         // START
-        PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(2));
+        PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(1));
         getDataInTool(performanceManagementTool);
-        performanceManagementTool.addNewFtpMeasurement(LocalDate.now().minusDays(30), 230);
+        performanceManagementTool.addNewFtpMeasurement(LocalDate.now().minusDays(31), 230);
         Function functionToPlot = performanceManagementTool.getFitnessFunction();
         XYChart.Series series = getData(functionToPlot, LocalDate.now().minusDays(30), 30);
         // STOP

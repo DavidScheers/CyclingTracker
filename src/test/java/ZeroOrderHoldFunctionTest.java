@@ -1,6 +1,6 @@
-import Functions.Function;
-import Functions.ZeroOrderHoldFunction;
-import Listener.FunctionListener;
+import functions.Function;
+import functions.ZeroOrderHoldFunction;
+import listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

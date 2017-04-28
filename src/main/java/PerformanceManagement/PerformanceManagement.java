@@ -1,6 +1,6 @@
-package PerformanceManagement;
+package performancemanagement;
 
-import Functions.Function;
+import functions.Function;
 import java.time.LocalDate;
 
 public interface PerformanceManagement {

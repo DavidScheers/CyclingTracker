@@ -1,8 +1,8 @@
 import static org.junit.Assert.*;
 
-import Functions.Function;
-import PerformanceManagement.PerformanceManagementTool;
-import PerformanceManagement.WorkoutIntensity;
+import functions.Function;
+import performancemanagement.PerformanceManagementTool;
+import performancemanagement.WorkoutIntensity;
 import org.junit.Before;
 import org.junit.Test;
 

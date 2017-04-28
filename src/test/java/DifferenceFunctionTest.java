@@ -1,10 +1,8 @@
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import Functions.DataBasedFunction;
-import Functions.DifferenceFunction;
-import Functions.Function;
-import Listener.FunctionListener;
-import com.sun.deploy.ui.DeployEmbeddedFrameIf;
+import functions.DataBasedFunction;
+import functions.DifferenceFunction;
+import listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

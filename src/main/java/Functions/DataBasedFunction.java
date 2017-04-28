@@ -1,4 +1,4 @@
-package Functions;
+package functions;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,6 +11,10 @@ public class DataBasedFunction extends FunctionBaseImplementation {
     public DataBasedFunction() {
         super();
         valueMap = new HashMap<>();
+    }
+
+    public DataBasedFunction(Map<LocalDate, Double> valueMap) {
+        this.valueMap = new HashMap<>(valueMap);
     }
 
     @Override
@@ -27,6 +31,10 @@ public class DataBasedFunction extends FunctionBaseImplementation {
         notifyListeners(listeners);
     }
 
+    public Map<LocalDate, Double> getValueMap() {
+        return new HashMap<>(valueMap);
+    }
+
     private void addToMap(LocalDate date, Double value) {
         if (valueMap.containsKey(date)) {
             valueMap.put(date, getUpdatedValue(date, value));
@@ -39,4 +47,18 @@ public class DataBasedFunction extends FunctionBaseImplementation {
         return valueMap.get(date) + value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DataBasedFunction that = (DataBasedFunction) o;
+
+        return valueMap != null ? valueMap.equals(that.valueMap) : that.valueMap == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return valueMap != null ? valueMap.hashCode() : 0;
+    }
 }

@@ -1,4 +1,4 @@
-package Functions;
+package functions;
 
 import java.time.LocalDate;
 import java.util.TreeMap;

@@ -1,5 +1,5 @@
-import Functions.DataBasedFunction;
-import Listener.FunctionListener;
+import functions.DataBasedFunction;
+import listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
