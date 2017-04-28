@@ -31,10 +31,6 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
         return bytes;
     }
 
-    private int getNumberOfBytesForDate(LocalDate date) {
-        return dateSerializer.serialize(date).length;
-    }
-
     @Override
     public DataBasedFunction deserialize(byte[] byteArray) {
         HashMap<LocalDate, Double> valueMap = new HashMap<>();
@@ -55,6 +51,10 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
     @Override
     public Set<Class<? extends DataBasedFunction>> getSupportedTypes() {
         return null;
+    }
+
+    private int getNumberOfBytesForDate(LocalDate date) {
+        return dateSerializer.serialize(date).length;
     }
 
     private int getNumberOfBytesForDates(Map<LocalDate, Double> valueMap) {
