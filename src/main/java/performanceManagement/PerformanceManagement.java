@@ -1,4 +1,4 @@
-package performancemanagement;
+package performanceManagement;
 
 import functions.Function;
 import java.time.LocalDate;

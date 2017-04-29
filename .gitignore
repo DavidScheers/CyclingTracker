@@ -8,3 +8,8 @@ out
 Order/.idea/workspace.xml
 
 *.class
+last-build.bin
+.gradle/3.5/taskHistory/taskHistory.lock
+.gradle/buildOutputCleanup/built.bin
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties.lock
