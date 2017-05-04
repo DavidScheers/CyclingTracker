@@ -1,6 +1,4 @@
 import functions.Function;
-import performancemanagement.PerformanceManagementTool;
-import performancemanagement.WorkoutIntensity;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -8,6 +6,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import performancemanagement.PerformanceManagementTool;
+import performancemanagement.WorkoutIntensity;
 
 import java.time.LocalDate;
 
