@@ -4,7 +4,10 @@ import functions.DataBasedFunction;
 
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction> {
 
@@ -19,7 +22,7 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
         Map<LocalDate, Double> valueMap = function.getValueMap();
 
         int totalDateLength = getNumberOfBytesForDates(valueMap);
-        byte[] bytes = new byte[valueMap.size()*12 + totalDateLength + 4];
+        byte[] bytes = new byte[valueMap.size() * 12 + totalDateLength + 4];
 
         ByteBuffer wrappedBytes = ByteBuffer.wrap(bytes);
         wrappedBytes.putInt(valueMap.size());
@@ -37,20 +40,20 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
         ByteBuffer wrap = ByteBuffer.wrap(byteArray);
         int numberOfValues = wrap.getInt();
 
-        for (int i = 0; i < numberOfValues ; i++) {
+        for (int i = 0; i < numberOfValues; i++) {
             int sizeOfDate = wrap.getInt();
             byte[] tempArray = new byte[sizeOfDate];
             wrap.get(tempArray);
             valueMap.put(dateSerializer.deserialize(tempArray), wrap.getDouble());
         }
         return new DataBasedFunction(valueMap);
-
-
     }
 
     @Override
     public Set<Class<? extends DataBasedFunction>> getSupportedTypes() {
-        return null;
+        Set<Class<? extends DataBasedFunction>> supportedTypes = new HashSet<>();
+        supportedTypes.add(DataBasedFunction.class);
+        return supportedTypes;
     }
 
     private int getNumberOfBytesForDate(LocalDate date) {
