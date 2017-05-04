@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 public class DataBasedFunctionSerializerTest {
@@ -19,7 +20,7 @@ public class DataBasedFunctionSerializerTest {
         actualFunction.addValue(LocalDate.now(), 17.2);
         byte[] bytes = serializer.serialize(actualFunction);
 
-        Assertions.assertThat(serializer.deserialize(bytes)).isEqualTo(actualFunction);
+        assertThat(serializer.deserialize(bytes)).isEqualTo(actualFunction);
     }
 
     @Test
@@ -30,6 +31,6 @@ public class DataBasedFunctionSerializerTest {
         actualFunction.addValue(LocalDate.now().plusDays(1L) , 5.5);
         byte[] bytes = serializer.serialize(actualFunction);
 
-        Assertions.assertThat(serializer.deserialize(bytes)).isEqualTo(actualFunction);
+        assertThat(serializer.deserialize(bytes)).isEqualTo(actualFunction);
     }
 }
