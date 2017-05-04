@@ -3,6 +3,8 @@ package functions;
 import java.time.LocalDate;
 import java.util.TreeMap;
 
+import static com.google.common.collect.Maps.newTreeMap;
+
 
 public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
 
@@ -11,6 +13,14 @@ public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
     public ZeroOrderHoldFunction() {
         super();
         valueMap = new TreeMap<>();
+    }
+
+    public ZeroOrderHoldFunction(TreeMap<LocalDate, Double> valueMap) {
+        this.valueMap = newTreeMap(valueMap);
+    }
+
+    public TreeMap<LocalDate, Double> getValueMap() {
+        return valueMap;
     }
 
     @Override
@@ -41,4 +51,18 @@ public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
         return valueMap.get(date) + value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ZeroOrderHoldFunction that = (ZeroOrderHoldFunction) o;
+
+        return valueMap != null ? valueMap.equals(that.valueMap) : that.valueMap == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return valueMap != null ? valueMap.hashCode() : 0;
+    }
 }
