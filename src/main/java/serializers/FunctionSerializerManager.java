@@ -17,21 +17,34 @@ public class FunctionSerializerManager implements Serializer<Function> {
     @Override
     public byte[] serialize(Function function) {
         for (Serializer<Function> managedSerializer : managedSerializers) {
-            if (managedSerializer.getSupportedTypes().contains(function.getClass())) {
-                int index = managedSerializers.indexOf(managedSerializer);
-                byte[] byteArray = new byte[2];
-                ByteBuffer indexByte = ByteBuffer.wrap(byteArray).putShort((short) index);
-                //byte[] sum = indexByte.get() + managedSerializer.serialize(function);
+            if (isSupported(function, managedSerializer)) {
+                ByteBuffer indexByte = createIndexIndicator(managedSerializer);
                 byte[] serialised = managedSerializer.serialize(function);
-                ByteBuffer wrappedSerialised = ByteBuffer.wrap(serialised);
-                ByteArrayOutputStream b = new ByteArrayOutputStream();
-                b.write(indexByte.get());
-                b.write(wrappedSerialised.get());
+
+                ByteArrayOutputStream b = concatByteArrays(indexByte, serialised);
 
                 return b.toByteArray();
             }
         }
         throw new UnsupportedOperationException();
+    }
+
+    private boolean isSupported(Function function, Serializer<Function> managedSerializer) {
+        return managedSerializer.getSupportedTypes().contains(function.getClass());
+    }
+
+    private ByteArrayOutputStream concatByteArrays(ByteBuffer indexByte, byte[] serialised) {
+        ByteBuffer wrappedSerialised = ByteBuffer.wrap(serialised);
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        b.write(indexByte.get());
+        b.write(wrappedSerialised.get());
+        return b;
+    }
+
+    private ByteBuffer createIndexIndicator(Serializer<Function> managedSerializer) {
+        int index = managedSerializers.indexOf(managedSerializer);
+        byte[] byteArray = new byte[2];
+        return ByteBuffer.wrap(byteArray).putShort((short) index);
     }
 
     @Override
