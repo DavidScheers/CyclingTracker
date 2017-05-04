@@ -10,9 +10,9 @@ public class LocalDataSerializer implements Serializer<LocalDate> {
     @Override
     public byte[] serialize(LocalDate date) {
         long value = date.toEpochDay();
-        byte[] bytes = new byte[8];
-        ByteBuffer.wrap(bytes).putLong(value);
-        return bytes;
+        byte[] byteArray = new byte[8];
+        ByteBuffer.wrap(byteArray).putLong(value);
+        return byteArray;
     }
 
     @Override
