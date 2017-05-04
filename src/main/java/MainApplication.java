@@ -19,12 +19,12 @@ public class MainApplication extends Application {
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         //creating the chart
-        final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
+        final LineChart<Number,Number> lineChart = new LineChart<>(xAxis,yAxis);
 
         // START
         PerformanceManagementTool performanceManagementTool = new PerformanceManagementTool(LocalDate.now().minusMonths(1));
-        getDataInTool(performanceManagementTool);
         performanceManagementTool.addNewFtpMeasurement(LocalDate.now().minusDays(31), 230);
+        getDataInTool(performanceManagementTool);
         Function functionToPlot = performanceManagementTool.getFitnessFunction();
         XYChart.Series series = getData(functionToPlot, LocalDate.now().minusDays(30), 30);
         // STOP
@@ -41,10 +41,10 @@ public class MainApplication extends Application {
 
     private void getDataInTool(PerformanceManagementTool performanceManagementTool) {
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(30), createWorkoutIntensity(30, 220)) ;
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(10), createWorkoutIntensity(40, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(8), createWorkoutIntensity(70, 180));
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(6), createWorkoutIntensity(30, 220));
-        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), createWorkoutIntensity(30, 220));
+        performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(4), createWorkoutIntensity(345, 240));
         performanceManagementTool.addTrainingsDay(LocalDate.now().minusDays(2), createWorkoutIntensity(30, 220));
     }
 
