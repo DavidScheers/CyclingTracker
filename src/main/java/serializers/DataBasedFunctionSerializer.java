@@ -11,9 +11,9 @@ import java.util.Set;
 
 public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction> {
 
-    private LocalDataSerializer dateSerializer;
+    private LocalDateSerializer dateSerializer;
 
-    public DataBasedFunctionSerializer(LocalDataSerializer dateSerializer) {
+    public DataBasedFunctionSerializer(LocalDateSerializer dateSerializer) {
         this.dateSerializer = dateSerializer;
     }
 

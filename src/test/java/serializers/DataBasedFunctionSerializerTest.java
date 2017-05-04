@@ -1,17 +1,15 @@
 package serializers;
 
 import functions.DataBasedFunction;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 public class DataBasedFunctionSerializerTest {
 
-    private DataBasedFunctionSerializer serializer = new DataBasedFunctionSerializer(new LocalDataSerializer());
+    private DataBasedFunctionSerializer serializer = new DataBasedFunctionSerializer(new LocalDateSerializer());
 
     @Test
     public void notSoFullChainTest() throws Exception {

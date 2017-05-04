@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LocalDataSerializer implements Serializer<LocalDate> {
+public class LocalDateSerializer implements Serializer<LocalDate> {
 
     @Override
     public byte[] serialize(LocalDate date) {
