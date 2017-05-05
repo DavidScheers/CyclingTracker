@@ -3,6 +3,7 @@ package serializers;
 import functions.ConstantFunction;
 import functions.DataBasedFunction;
 import functions.Function;
+import functions.ZeroOrderHoldFunction;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
@@ -10,9 +11,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.google.common.collect.Sets.newHashSet;
+
 public class FunctionSerializerManager implements Serializer<Function> {
 
     private List<Serializer<Function>> managedSerializers;
+
+    public FunctionSerializerManager(List<Serializer<Function>> managedSerializers) {
+        this.managedSerializers = managedSerializers;
+    }
 
     @Override
     public byte[] serialize(Function function) {
@@ -59,9 +66,7 @@ public class FunctionSerializerManager implements Serializer<Function> {
 
     @Override
     public Set<Class<? extends Function>> getSupportedTypes() {
-        Set<Class<? extends Function>> supportedTypes = new HashSet<>();
-        supportedTypes.add(ConstantFunction.class);
-        supportedTypes.add(DataBasedFunction.class);
+        Set<Class<? extends Function>> supportedTypes = newHashSet(ConstantFunction.class, DataBasedFunction.class, ZeroOrderHoldFunction.class);
         return supportedTypes;
     }
 }
