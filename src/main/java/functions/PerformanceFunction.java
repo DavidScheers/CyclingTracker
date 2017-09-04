@@ -25,7 +25,7 @@ public class PerformanceFunction extends FunctionBaseImplementation implements F
             result = 0.0;
         } else {
             double valueYesterday = getValueYesterday(date);
-            result = valueYesterday + (getTss(date) - valueYesterday)*getFactor();
+            result = valueYesterday + (getTss(date) - valueYesterday) * getFactor();
         }
         return result;
     }
@@ -39,13 +39,12 @@ public class PerformanceFunction extends FunctionBaseImplementation implements F
     }
 
     private double getFactor() {
-        return (1-Math.exp(-1/decayParameter));
+        return (1 - Math.exp(-1 / decayParameter));
     }
 
     private void subscribeToListeners() {
         tssFunction.addListener(this);
     }
-
 
     @Override
     public void changeDetected() {

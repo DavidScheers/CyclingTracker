@@ -6,6 +6,9 @@ import java.time.LocalDate;
 
 public class PerformanceManagementTool implements PerformanceManagement {
 
+    private static final int DECAY_PARAMETER_FITNESS = 42;
+    private static final int DECAY_PARAMETER_FATIGUE = 7;
+
     private DataBasedFunction tssFunction;
     private ZeroOrderHoldFunction ftpFunction;
     private LocalDate startOfTrackingDate;
@@ -33,7 +36,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFitnessFunction() {
-        return new PerformanceFunction(getTssFunction(),42, startOfTrackingDate);
+        return new PerformanceFunction(getTssFunction(), DECAY_PARAMETER_FITNESS, startOfTrackingDate);
     }
 
     private DataBasedFunction getTssFunction() {
@@ -42,7 +45,7 @@ public class PerformanceManagementTool implements PerformanceManagement {
 
     @Override
     public Function getFatigueFunction() {
-        return new PerformanceFunction(getTssFunction(),7, startOfTrackingDate);
+        return new PerformanceFunction(getTssFunction(), DECAY_PARAMETER_FATIGUE, startOfTrackingDate);
     }
 
     @Override

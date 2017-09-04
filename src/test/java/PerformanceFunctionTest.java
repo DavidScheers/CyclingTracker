@@ -28,13 +28,6 @@ public class PerformanceFunctionTest {
         performanceFunction = new PerformanceFunction(tssFunction, 42, LONG_AGO);
     }
 
-    private void getData() {
-        tssFunction.addValue(TODAY, 0.55);
-        tssFunction.addValue(YESTERYESTERDAY, 0.4);
-        tssFunction.addValue(YESTERDAY, 0.8);
-        tssFunction.addValue(ONE_WEEK_AGO, 0.35);
-    }
-
     @Test
     public void getValue_Today_ShouldReturn() throws Exception {
         assertEquals(performanceFunction.getValue(TODAY), 0.04726, 0.00001);
@@ -51,6 +44,13 @@ public class PerformanceFunctionTest {
         performanceFunction.addListener(mockedListener);
         performanceFunction.changeDetected();
         verify(mockedListener).changeDetected();
+    }
+
+    private void getData() {
+        tssFunction.addValue(TODAY, 0.55);
+        tssFunction.addValue(YESTERYESTERDAY, 0.4);
+        tssFunction.addValue(YESTERDAY, 0.8);
+        tssFunction.addValue(ONE_WEEK_AGO, 0.35);
     }
 
 }

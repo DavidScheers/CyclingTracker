@@ -7,7 +7,6 @@ import functions.ZeroOrderHoldFunction;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +22,7 @@ public class FunctionSerializerManager implements Serializer<Function> {
 
     @Override
     public byte[] serialize(Function function) {
+
         for (Serializer<Function> managedSerializer : managedSerializers) {
             if (isSupported(function, managedSerializer)) {
                 ByteBuffer indexByte = createIndexIndicator(managedSerializer);
@@ -66,7 +66,6 @@ public class FunctionSerializerManager implements Serializer<Function> {
 
     @Override
     public Set<Class<? extends Function>> getSupportedTypes() {
-        Set<Class<? extends Function>> supportedTypes = newHashSet(ConstantFunction.class, DataBasedFunction.class, ZeroOrderHoldFunction.class);
-        return supportedTypes;
+        return newHashSet(ConstantFunction.class, DataBasedFunction.class, ZeroOrderHoldFunction.class);
     }
 }

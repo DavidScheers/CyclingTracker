@@ -13,7 +13,7 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
 
     private LocalDateSerializer dateSerializer;
 
-    public DataBasedFunctionSerializer(LocalDateSerializer dateSerializer) {
+    DataBasedFunctionSerializer(LocalDateSerializer dateSerializer) {
         this.dateSerializer = dateSerializer;
     }
 
@@ -26,11 +26,12 @@ public class DataBasedFunctionSerializer implements Serializer<DataBasedFunction
 
         ByteBuffer wrappedBytes = ByteBuffer.wrap(bytes);
         wrappedBytes.putInt(valueMap.size());
-        for (LocalDate localDate : valueMap.keySet()) {
-            wrappedBytes.putInt(getNumberOfBytesForDate(localDate));
-            wrappedBytes.put(dateSerializer.serialize(localDate));
-            wrappedBytes.putDouble(valueMap.get(localDate));
-        }
+
+        valueMap.keySet().stream()
+                .forEach(localDate ->
+                        wrappedBytes.putInt(getNumberOfBytesForDate(localDate))
+                                .put(dateSerializer.serialize(localDate))
+                                .putDouble(valueMap.get(localDate)));
         return bytes;
     }
 

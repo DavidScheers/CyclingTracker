@@ -9,14 +9,13 @@ public abstract class FunctionBaseImplementation implements Function {
 
     List<FunctionListener> listeners;
 
-    public FunctionBaseImplementation() {
+    FunctionBaseImplementation() {
         this.listeners = new ArrayList<>();
     }
 
     void notifyListeners(List<FunctionListener> listeners) {
-        for (FunctionListener listener : listeners) {
-            listener.changeDetected();
-        }
+        listeners.stream()
+                .forEach(FunctionListener::changeDetected);
     }
 
     @Override

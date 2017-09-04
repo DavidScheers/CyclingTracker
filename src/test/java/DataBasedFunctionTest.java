@@ -3,6 +3,7 @@ import listener.FunctionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
@@ -20,12 +21,6 @@ public class DataBasedFunctionTest {
         dataBasedFunction = new DataBasedFunction();
         getData();
 
-    }
-
-    private void getData() {
-        dataBasedFunction.addValue(TODAY, 5.0);
-        dataBasedFunction.addValue(YESTERDAY, 6.0);
-        dataBasedFunction.addValue(ONE_WEEK_AGO, 10.0);
     }
 
     @Test
@@ -49,6 +44,12 @@ public class DataBasedFunctionTest {
         dataBasedFunction.addListener(mockedDifferenceFunctionListener);
         dataBasedFunction.addValue(ONE_WEEK_AGO.plusDays(1), 5.0);
         verify(mockedDifferenceFunctionListener).changeDetected();
+    }
+
+    private void getData() {
+        dataBasedFunction.addValue(TODAY, 5.0);
+        dataBasedFunction.addValue(YESTERDAY, 6.0);
+        dataBasedFunction.addValue(ONE_WEEK_AGO, 10.0);
     }
 
 }
