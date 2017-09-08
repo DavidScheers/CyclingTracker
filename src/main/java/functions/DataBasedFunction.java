@@ -1,20 +1,21 @@
 package functions;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
+
+import static com.google.common.collect.Maps.newHashMap;
 
 public class DataBasedFunction extends FunctionBaseImplementation {
 
-    private Map<LocalDate, Double>  valueMap;
+    private Map<LocalDate, Double> valueMap;
 
     public DataBasedFunction() {
         super();
-        valueMap = new HashMap<>();
+        valueMap = newHashMap();
     }
 
     public DataBasedFunction(Map<LocalDate, Double> valueMap) {
-        this.valueMap = new HashMap<>(valueMap);
+        this.valueMap = newHashMap(valueMap);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class DataBasedFunction extends FunctionBaseImplementation {
     }
 
     public Map<LocalDate, Double> getValueMap() {
-        return new HashMap<>(valueMap);
+        return newHashMap(valueMap);
     }
 
     private void addToMap(LocalDate date, Double value) {

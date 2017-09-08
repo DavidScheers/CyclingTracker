@@ -12,7 +12,7 @@ public class ZeroOrderHoldFunction extends FunctionBaseImplementation {
 
     public ZeroOrderHoldFunction() {
         super();
-        valueMap = new TreeMap<>();
+        valueMap = newTreeMap();
     }
 
     public ZeroOrderHoldFunction(TreeMap<LocalDate, Double> valueMap) {
