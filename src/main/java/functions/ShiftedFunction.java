@@ -6,23 +6,26 @@ import java.time.LocalDate;
 
 public class ShiftedFunction extends FunctionBaseImplementation implements FunctionListener {
 
-    private DifferenceFunction differenceFunction;
+    private Function functionToShift;
     private int datesToShift;
 
-    public ShiftedFunction(DifferenceFunction differenceFunction, int datesToShift) {
+    public ShiftedFunction(Function functionToShift, int datesToShift) {
         super();
-        this.differenceFunction = differenceFunction;
+        this.functionToShift = functionToShift;
         this.datesToShift = datesToShift;
         subscribeToListeners();
     }
 
+    private ShiftedFunction() {
+    }
+
     @Override
     public double getValue(LocalDate date) {
-        return differenceFunction.getValue(date.minusDays(datesToShift));
+        return functionToShift.getValue(date.minusDays(datesToShift));
     }
 
     private void subscribeToListeners() {
-        differenceFunction.addListener(this);
+        functionToShift.addListener(this);
     }
 
     @Override

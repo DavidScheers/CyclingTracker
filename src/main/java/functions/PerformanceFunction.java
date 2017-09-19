@@ -20,14 +20,14 @@ public class PerformanceFunction extends FunctionBaseImplementation implements F
 
     @Override
     public double getValue(LocalDate date) {
-        double result;
+        double value;
         if (date.isBefore(startDate)) {
-            result = 0.0;
+            value = 0.0;
         } else {
             double valueYesterday = getValueYesterday(date);
-            result = valueYesterday + (getTss(date) - valueYesterday) * getFactor();
+            value = valueYesterday + (getTss(date) - valueYesterday) * getFactor();
         }
-        return result;
+        return value;
     }
 
     private double getValueYesterday(LocalDate date) {
