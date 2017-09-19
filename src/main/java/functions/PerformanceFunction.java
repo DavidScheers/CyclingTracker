@@ -18,6 +18,9 @@ public class PerformanceFunction extends FunctionBaseImplementation implements F
         subscribeToListeners();
     }
 
+    private PerformanceFunction() {
+    }
+
     @Override
     public double getValue(LocalDate date) {
         double value;
